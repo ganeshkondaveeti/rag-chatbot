@@ -72,17 +72,17 @@ Bootstrap the project repository, establish the directory structure (backend + f
 
 | # | Task | File(s) / Action | Status |
 |---|------|-------------------|--------|
-| 1.1 | Create project directory structure | All directories as per architecture | `[ ]` |
-| 1.2 | Initialize Python virtual environment | `python3 -m venv .venv` | `[ ]` |
-| 1.3 | Create `requirements.txt` with pinned dependencies | `backend/requirements.txt` | `[ ]` |
-| 1.4 | Install all dependencies | `pip install -r backend/requirements.txt` | `[ ]` |
-| 1.5 | Install Playwright browsers | `playwright install chromium` | `[ ]` |
-| 1.6 | Create `.env.example` with all config variables | `.env.example` | `[ ]` |
-| 1.7 | Create `.env` from `.env.example` (fill in GROQ_API_KEY, INGEST_API_KEY) | `.env` (gitignored) | `[ ]` |
-| 1.8 | Create `.gitignore` | `.gitignore` | `[ ]` |
-| 1.9 | Create all `__init__.py` files | `backend/src/` and all subpackages | `[ ]` |
-| 1.10 | Verify Groq API connectivity | Quick test script | `[ ]` |
-| 1.11 | Initialize Git repo and make first commit | `git init && git add . && git commit` | `[ ]` |
+| 1.1 | Create project directory structure | All directories as per architecture | `[x]` |
+| 1.2 | Initialize Python virtual environment | `python3 -m venv .venv` | `[x]` |
+| 1.3 | Create `requirements.txt` with pinned dependencies | `backend/requirements.txt` | `[x]` |
+| 1.4 | Install all dependencies | `pip install -r backend/requirements.txt` | `[/]` |
+| 1.5 | Install Playwright browsers | `playwright install chromium` | `[/]` |
+| 1.6 | Create `.env.example` with all config variables | `.env.example` | `[x]` |
+| 1.7 | Create `.env` from `.env.example` (fill in GROQ_API_KEY, INGEST_API_KEY) | `.env` (gitignored) | `[x]` |
+| 1.8 | Create `.gitignore` | `.gitignore` | `[x]` |
+| 1.9 | Create all `__init__.py` files | `backend/src/` and all subpackages | `[x]` |
+| 1.10 | Verify Groq API connectivity | Quick test script | `[/]` |
+| 1.11 | Initialize Git repo and make first commit | `git init && git add . && git commit` | `[x]` |
 
 > **Note**: Railway and Vercel project creation is deferred to Phase 8 (Deployment). During development, everything runs locally on your Mac.
 
@@ -224,15 +224,15 @@ Build a Playwright-based scraper that navigates each of the 5 Groww HDFC mutual 
 
 | # | Task | File(s) | Status |
 |---|------|---------|--------|
-| 2.1 | Implement Playwright scraper for single URL | `backend/src/scraper/groww_scraper.py` | `[ ]` |
-| 2.2 | Inspect Groww page DOM to identify CSS selectors for each section | Manual exploration | `[ ]` |
-| 2.3 | Extract structured data: Fund Overview, Fund Details, NAV & AUM, Tax Info | `backend/src/scraper/groww_scraper.py` | `[ ]` |
-| 2.4 | Implement content cleaner (strip nav, ads, modals, normalize whitespace) | `backend/src/scraper/content_cleaner.py` | `[ ]` |
-| 2.5 | Add PII scrubbing to cleaner (regex for PAN, Aadhaar, phone, email) | `backend/src/scraper/content_cleaner.py` | `[ ]` |
-| 2.6 | Add metadata attachment (source_url, scrape_date, scheme_name, section) | `backend/src/scraper/groww_scraper.py` | `[ ]` |
-| 2.7 | Create callable scraper function (to be used by API ingest endpoint) | `backend/src/scraper/groww_scraper.py` | `[ ]` |
-| 2.8 | Save raw HTML to `data/raw/` and cleaned JSON to `data/processed/` | `backend/src/scraper/groww_scraper.py` | `[ ]` |
-| 2.9 | Test scraper against all 5 URLs; verify output completeness | Manual verification | `[ ]` |
+| 2.1 | Implement Playwright scraper for single URL | `backend/src/scraper/groww_scraper.py` | `[x]` |
+| 2.2 | Inspect Groww page DOM to identify CSS selectors for each section | Manual exploration | `[x]` |
+| 2.3 | Extract structured data: Fund Overview, Fund Details, NAV & AUM, Tax Info | `backend/src/scraper/groww_scraper.py` | `[x]` |
+| 2.4 | Implement content cleaner (strip nav, ads, modals, normalize whitespace) | `backend/src/scraper/content_cleaner.py` | `[x]` |
+| 2.5 | Add PII scrubbing to cleaner (regex for PAN, Aadhaar, phone, email) | `backend/src/scraper/content_cleaner.py` | `[x]` |
+| 2.6 | Add metadata attachment (source_url, scrape_date, scheme_name, section) | `backend/src/scraper/groww_scraper.py` | `[x]` |
+| 2.7 | Create callable scraper function (to be used by API ingest endpoint) | `backend/src/scraper/groww_scraper.py` | `[x]` |
+| 2.8 | Save raw HTML to `data/raw/` and cleaned JSON to `data/processed/` | `backend/src/scraper/groww_scraper.py` | `[x]` |
+| 2.9 | Test scraper against all 5 URLs; verify output completeness | Manual verification | `[/]` |
 
 ### 2.4 Scraper Output Schema
 
