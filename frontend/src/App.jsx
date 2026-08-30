@@ -228,7 +228,7 @@ function App() {
       </header>
 
       {/* Main Layout */}
-      <main className="w-full pt-20 flex-1 flex flex-col md:flex-row relative overflow-hidden">
+      <main className="w-full pt-20 flex-1 min-h-0 flex flex-col md:flex-row relative overflow-hidden">
         
         {/* Sidebar */}
         <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-surface-container-low dark:bg-gray-800/50 border-r border-outline-variant/30 dark:border-gray-700 h-full flex-shrink-0 z-40">
@@ -284,10 +284,10 @@ function App() {
           </div>
 
           {/* Main Chat Container */}
-          <div ref={chatContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden relative scroll-smooth flex flex-col items-center w-full pb-32">
+          <div ref={chatContainerRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden relative scroll-smooth flex flex-col items-center w-full pb-32">
             
             {/* Abstract Background Decoration */}
-            <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply dark:mix-blend-screen dark:opacity-10 flex justify-center -z-10 fixed">
+            <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply dark:mix-blend-screen dark:opacity-10 flex justify-center -z-10">
               <svg className="w-full h-full text-primary-fixed-dim/20 dark:text-primary-fixed/30 fill-current animate-[spin_120s_linear_infinite]" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
                 <path d="M48.5,-63.3C62.1,-52.1,72.1,-36.8,77.7,-19.7C83.3,-2.6,84.4,16.2,76.5,31.4C68.6,46.6,51.7,58.3,34.2,65.3C16.6,72.4,-1.7,74.9,-20.2,71.7C-38.6,68.6,-57.2,59.8,-68.8,45.2C-80.4,30.5,-85,10,-81.4,-8.4C-77.8,-26.8,-66,-43.2,-51,-54.6C-36.1,-66,-18,-72.4,-0.2,-72.2C17.7,-71.9,35,-65,48.5,-63.3Z" transform="translate(500 500) scale(4)"></path>
               </svg>
