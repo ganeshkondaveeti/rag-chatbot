@@ -105,9 +105,9 @@ function App() {
     } else {
       if (wasTypingRef.current) {
         wasTypingRef.current = false;
-        const lastMsgIndex = messages.length - 1;
-        if (lastMsgIndex >= 0) {
-          const msgEl = document.getElementById(`message-${lastMsgIndex}`);
+        const lastUserMsgIndex = messages.length - 2;
+        if (lastUserMsgIndex >= 0) {
+          const msgEl = document.getElementById(`message-${lastUserMsgIndex}`);
           if (msgEl) {
             msgEl.scrollIntoView({ behavior: 'auto', block: 'start' });
             return;
