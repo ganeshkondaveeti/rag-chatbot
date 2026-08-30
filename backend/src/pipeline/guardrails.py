@@ -13,7 +13,7 @@ PII_PATTERNS = {
 ADVISORY_KEYWORDS = [
     "should", "recommend", "suggest", "better", "best",
     "compare", "which fund", "buy", "sell", "hold", 
-    "prediction", "forecast", "advice", "good for me"
+    "prediction", "forecast", "advice", "good for me", "predict"
 ]
 
 # Keywords for Performance Queries

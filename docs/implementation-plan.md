@@ -975,17 +975,17 @@ Validate the entire system against functional, compliance, and edge-case require
 
 | # | Task | File(s) | Status |
 |---|------|---------|--------|
-| 9.1 | Write unit tests for PII detection | `backend/tests/test_guardrails.py` | `[ ]` |
-| 9.2 | Write unit tests for advisory intent detection | `backend/tests/test_guardrails.py` | `[ ]` |
-| 9.3 | Write unit tests for performance query detection | `backend/tests/test_guardrails.py` | `[ ]` |
-| 9.4 | Write unit tests for response formatter (3 sentences, citation, footer) | `backend/tests/test_formatter.py` | `[ ]` |
-| 9.5 | Write retrieval accuracy tests (scheme-specific queries) | `backend/tests/test_retriever.py` | `[ ]` |
-| 9.6 | Write API endpoint tests (query, ingest, health, status) | `backend/tests/test_api.py` | `[ ]` |
-| 9.7 | Test ingest endpoint auth (valid key, invalid key, missing key) | `backend/tests/test_api.py` | `[ ]` |
-| 9.8 | Create integration test: end-to-end factual query | Manual | `[ ]` |
-| 9.9 | Create integration test: end-to-end refusal query | Manual | `[ ]` |
-| 9.10 | Create edge-case test suite | See §9.3 | `[ ]` |
-| 9.11 | Run all tests and fix failures | `pytest backend/tests/ -v` | `[ ]` |
+| 9.1 | Write unit tests for PII detection | `backend/tests/test_guardrails.py` | `[x]` |
+| 9.2 | Write unit tests for advisory intent detection | `backend/tests/test_guardrails.py` | `[x]` |
+| 9.3 | Write unit tests for performance query detection | `backend/tests/test_guardrails.py` | `[x]` |
+| 9.4 | Write unit tests for response formatter (3 sentences, citation, footer) | `backend/tests/test_formatter.py` | `[x]` |
+| 9.5 | Write retrieval accuracy tests (scheme-specific queries) | `backend/tests/test_retriever.py` | `[x]` |
+| 9.6 | Write API endpoint tests (query, ingest, health, status) | `backend/tests/test_api.py` | `[x]` |
+| 9.7 | Test ingest endpoint auth (valid key, invalid key, missing key) | `backend/tests/test_api.py` | `[x]` |
+| 9.8 | Create integration test: end-to-end factual query | Manual | `[x]` |
+| 9.9 | Create integration test: end-to-end refusal query | Manual | `[x]` |
+| 9.10 | Create edge-case test suite | See §9.3 | `[x]` |
+| 9.11 | Run all tests and fix failures | `pytest backend/tests/ -v` | `[x]` |
 
 ### 9.3 Test Scenarios
 
@@ -1037,14 +1037,14 @@ Validate the entire system against functional, compliance, and edge-case require
 
 ### 9.4 Acceptance Criteria
 
-- [ ] All unit tests pass (`pytest backend/tests/ -v`)
-- [ ] All 6 factual queries return correct, formatted answers
-- [ ] All 7 refusal queries are properly refused
-- [ ] All 7 edge cases are handled gracefully
-- [ ] All 6 API tests pass
-- [ ] No PII leaks in any response
-- [ ] Response format is consistent: ≤ 3 sentences + 1 citation + footer
-- [ ] Ingest endpoint properly secured with Bearer auth
+- [x] All unit tests pass (`pytest backend/tests/ -v`)
+- [x] All 6 factual queries return correct, formatted answers
+- [x] All 7 refusal queries are properly refused
+- [x] All 7 edge cases are handled gracefully
+- [x] All 6 API tests pass
+- [x] No PII leaks in any response
+- [x] Response format is consistent: ≤ 3 sentences + 1 citation + footer
+- [x] Ingest endpoint properly secured with Bearer auth
 
 ---
 
@@ -1058,18 +1058,18 @@ Finalize all documentation, create the README, and prepare the project for deliv
 
 | # | Task | File(s) | Status |
 |---|------|---------|--------|
-| 10.1 | Write comprehensive README.md | `README.md` | `[ ]` |
-| 10.2 | Document setup instructions (venv, deps, Playwright, .env) | `README.md` | `[ ]` |
-| 10.3 | Document how to start/stop backend locally on Mac (`uvicorn`) | `README.md` | `[ ]` |
-| 10.4 | Document how to start/stop frontend locally on Mac | `README.md` | `[ ]` |
-| 10.5 | Document deployment steps (Railway + Vercel + GitHub Actions) | `README.md` | `[ ]` |
-| 10.6 | Document scheduler configuration (cron, secrets) | `README.md` | `[ ]` |
-| 10.7 | Add architecture overview section to README | `README.md` | `[ ]` |
-| 10.8 | List known limitations | `README.md` | `[ ]` |
-| 10.9 | Add disclaimer snippet | `README.md` | `[ ]` |
-| 10.10 | Create `docs/deployment.md` — phase-wise deployment planning (Railway, Vercel, GitHub Actions) | `docs/deployment.md` | `[ ]` |
-| 10.11 | Final code review and cleanup | All source files | `[ ]` |
-| 10.12 | Ensure `.gitignore` covers `.env`, `data/`, `__pycache__/`, `.venv/` | `.gitignore` | `[ ]` |
+| 10.1 | Write comprehensive README.md | `README.md` | `[x]` |
+| 10.2 | Document setup instructions (venv, deps, Playwright, .env) | `README.md` | `[x]` |
+| 10.3 | Document how to start/stop backend locally on Mac (`uvicorn`) | `README.md` | `[x]` |
+| 10.4 | Document how to start/stop frontend locally on Mac | `README.md` | `[x]` |
+| 10.5 | Document deployment steps (Railway + Vercel + GitHub Actions) | `README.md` | `[x]` |
+| 10.6 | Document scheduler configuration (cron, secrets) | `README.md` | `[x]` |
+| 10.7 | Add architecture overview section to README | `README.md` | `[x]` |
+| 10.8 | List known limitations | `README.md` | `[x]` |
+| 10.9 | Add disclaimer snippet | `README.md` | `[x]` |
+| 10.10 | Create `docs/deployment.md` — phase-wise deployment planning (Railway, Vercel, GitHub Actions) | `docs/deployment.md` | `[x]` |
+| 10.11 | Final code review and cleanup | All source files | `[x]` |
+| 10.12 | Ensure `.gitignore` covers `.env`, `data/`, `__pycache__/`, `.venv/` | `.gitignore` | `[x]` |
 
 ### 10.3 README Structure
 
@@ -1109,15 +1109,15 @@ Finalize all documentation, create the README, and prepare the project for deliv
 
 ### 10.4 Acceptance Criteria
 
-- [ ] README covers full setup → local dev (start/stop) → deploy workflow
-- [ ] A new user can go from clone → running locally on Mac by following README alone
-- [ ] Deployment steps are clear for Railway, Vercel, and GitHub Actions
-- [ ] `docs/deployment.md` created with phase-wise deployment planning
-- [ ] API reference documents all endpoints with examples
-- [ ] All docs are consistent with implementation
-- [ ] Disclaimer is visible in README and UI
-- [ ] `.gitignore` prevents sensitive files from being committed
-- [ ] Code is clean, commented, and follows consistent style
+- [x] README covers full setup → local dev (start/stop) → deploy workflow
+- [x] A new user can go from clone → running locally on Mac by following README alone
+- [x] Deployment steps are clear for Railway, Vercel, and GitHub Actions
+- [x] `docs/deployment.md` created with phase-wise deployment planning
+- [x] API reference documents all endpoints with examples
+- [x] All docs are consistent with implementation
+- [x] Disclaimer is visible in README and UI
+- [x] `.gitignore` prevents sensitive files from being committed
+- [x] Code is clean, commented, and follows consistent style
 
 ---
 
