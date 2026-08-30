@@ -45,42 +45,41 @@ class GrowwScraper:
         os.makedirs(self.raw_dir, exist_ok=True)
         os.makedirs(self.processed_dir, exist_ok=True)
 
-    def extract_sections(self, html_content: str) -> List[Dict[str, Any]]:
+    def extract_sections(self, html_content: str, scheme_name: str) -> List[Dict[str, Any]]:
         """Parses HTML and extracts structured sections."""
+        import re
         soup = BeautifulSoup(html_content, "html.parser")
         
         # Remove nav, header, footer, scripts, and styles to reduce noise
         for elements in soup(['nav', 'header', 'footer', 'script', 'style', 'aside']):
             elements.decompose()
             
+        text = soup.get_text(separator='\n', strip=True)
         sections = []
         
         # Fund Overview
-        overview = soup.find('div', class_=lambda c: c and 'fundOverview' in c)
-        if overview:
-            sections.append(self.cleaner.process_section("Fund Overview", overview.get_text(separator='\n')))
-        else:
-            # Fallback for generic text extraction if classes change
-            h1 = soup.find('h1')
-            if h1 and h1.parent:
-                sections.append(self.cleaner.process_section("Fund Overview", h1.parent.get_text(separator='\n')))
-                
-        # Fund Details (Expense, Exit load, etc)
-        details = soup.find(text=lambda t: t and 'Expense Ratio' in t)
-        if details and details.parent and details.parent.parent:
-            # Climb up the tree a bit to capture the whole table/section
-            sections.append(self.cleaner.process_section("Fund Details", details.parent.parent.parent.get_text(separator='\n')))
+        about_match = re.search(fr'About {re.escape(scheme_name)}(.*?)(?=Investment Objective|Fund benchmark|Scheme Information Document)', text, re.IGNORECASE | re.DOTALL)
+        if about_match:
+            sections.append(self.cleaner.process_section("Fund Overview", about_match.group(1).strip()))
             
-        # Returns & NAV
-        nav = soup.find(text=lambda t: t and 'NAV' in t)
-        if nav and nav.parent and nav.parent.parent:
-            sections.append(self.cleaner.process_section("NAV & AUM", nav.parent.parent.parent.get_text(separator='\n')))
+        # Fund Details
+        details_match = re.search(r'(Min\. for SIP.*?)(?=Holdings|Return calculator|Annualised returns|Understand terms)', text, re.IGNORECASE | re.DOTALL)
+        if details_match:
+            sections.append(self.cleaner.process_section("Fund Details", details_match.group(1).strip()))
             
-        # If we failed to get structured sections, just chunk the main body text heuristically
+        # NAV & AUM
+        nav_match = re.search(r'(NAV:.*?)(?=Return calculator|Holdings|Min\. for SIP)', text, re.IGNORECASE | re.DOTALL)
+        if nav_match:
+            sections.append(self.cleaner.process_section("NAV & AUM", nav_match.group(1).strip()))
+            
+        # Tax Info
+        tax_match = re.search(r'(Tax implication.*?)(?=Check past data|Compare similar funds|Fund management)', text, re.IGNORECASE | re.DOTALL)
+        if tax_match:
+            sections.append(self.cleaner.process_section("Tax Info", tax_match.group(1).strip()))
+            
+        # Fallback
         if not sections:
-            main_content = soup.find('main') or soup.find('body')
-            if main_content:
-                sections.append(self.cleaner.process_section("General Info", main_content.get_text(separator='\n')))
+            sections.append(self.cleaner.process_section("General Info", text[:2000]))
 
         return sections
 
@@ -108,7 +107,7 @@ class GrowwScraper:
                     f.write(html_content)
                     
                 # Process and Extract Sections
-                sections = self.extract_sections(html_content)
+                sections = self.extract_sections(html_content, scheme_name)
                 
                 output = {
                     "scheme_name": scheme_name,

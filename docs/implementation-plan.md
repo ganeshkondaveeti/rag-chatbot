@@ -75,13 +75,13 @@ Bootstrap the project repository, establish the directory structure (backend + f
 | 1.1 | Create project directory structure | All directories as per architecture | `[x]` |
 | 1.2 | Initialize Python virtual environment | `python3 -m venv .venv` | `[x]` |
 | 1.3 | Create `requirements.txt` with pinned dependencies | `backend/requirements.txt` | `[x]` |
-| 1.4 | Install all dependencies | `pip install -r backend/requirements.txt` | `[/]` |
-| 1.5 | Install Playwright browsers | `playwright install chromium` | `[/]` |
+| 1.4 | Install all dependencies | `pip install -r backend/requirements.txt` | `[x]` |
+| 1.5 | Install Playwright browsers | `playwright install chromium` | `[x]` |
 | 1.6 | Create `.env.example` with all config variables | `.env.example` | `[x]` |
 | 1.7 | Create `.env` from `.env.example` (fill in GROQ_API_KEY, INGEST_API_KEY) | `.env` (gitignored) | `[x]` |
 | 1.8 | Create `.gitignore` | `.gitignore` | `[x]` |
 | 1.9 | Create all `__init__.py` files | `backend/src/` and all subpackages | `[x]` |
-| 1.10 | Verify Groq API connectivity | Quick test script | `[/]` |
+| 1.10 | Verify Groq API connectivity | Quick test script | `[x]` |
 | 1.11 | Initialize Git repo and make first commit | `git init && git add . && git commit` | `[x]` |
 
 > **Note**: Railway and Vercel project creation is deferred to Phase 8 (Deployment). During development, everything runs locally on your Mac.
@@ -232,7 +232,7 @@ Build a Playwright-based scraper that navigates each of the 5 Groww HDFC mutual 
 | 2.6 | Add metadata attachment (source_url, scrape_date, scheme_name, section) | `backend/src/scraper/groww_scraper.py` | `[x]` |
 | 2.7 | Create callable scraper function (to be used by API ingest endpoint) | `backend/src/scraper/groww_scraper.py` | `[x]` |
 | 2.8 | Save raw HTML to `data/raw/` and cleaned JSON to `data/processed/` | `backend/src/scraper/groww_scraper.py` | `[x]` |
-| 2.9 | Test scraper against all 5 URLs; verify output completeness | Manual verification | `[/]` |
+| 2.9 | Test scraper against all 5 URLs; verify output completeness | Manual verification | `[x]` |
 
 ### 2.4 Scraper Output Schema
 
@@ -300,39 +300,68 @@ Read the cleaned JSON data, chunk it into semantically meaningful pieces, genera
 
 | # | Task | File(s) | Status |
 |---|------|---------|--------|
-| 3.1 | Implement text chunker with `RecursiveCharacterTextSplitter` | `backend/src/ingestion/chunker.py` | `[ ]` |
-| 3.2 | Configure chunk size (500 chars) and overlap (50 chars) | `backend/src/ingestion/chunker.py` | `[ ]` |
-| 3.3 | Attach metadata to each chunk: `scheme_name`, `section`, `source_url`, `scrape_date` | `backend/src/ingestion/chunker.py` | `[ ]` |
-| 3.4 | Implement embedding wrapper using `BAAI/bge-large-en-v1.5` | `backend/src/ingestion/embedder.py` | `[ ]` |
-| 3.5 | Download and cache BGE-large model locally | `backend/src/ingestion/embedder.py` | `[ ]` |
-| 3.6 | Implement ChromaDB collection manager (create, upsert, delete, reset) | `backend/src/ingestion/vectorstore.py` | `[ ]` |
-| 3.7 | Configure persistent storage at `$CHROMA_PERSIST_DIR` | `backend/src/ingestion/vectorstore.py` | `[ ]` |
-| 3.8 | Create full ingestion function: scrape → clean → chunk → embed → store | `backend/src/ingestion/` | `[ ]` |
-| 3.9 | Add re-ingestion support (clear collection + re-insert) | `backend/src/ingestion/vectorstore.py` | `[ ]` |
-| 3.10 | Validate stored chunk count and sample retrieval | Manual verification | `[ ]` |
+| 3.1 | Implement text chunker with `RecursiveCharacterTextSplitter` | `backend/src/ingestion/chunker.py` | `[x]` |
+| 3.2 | Configure chunk size (500 chars) and overlap (50 chars) | `backend/src/ingestion/chunker.py` | `[x]` |
+| 3.3 | Attach metadata to each chunk: `scheme_name`, `section`, `source_url`, `scrape_date` | `backend/src/ingestion/chunker.py` | `[x]` |
+| 3.4 | Implement embedding wrapper using `langchain_google_genai.GoogleGenerativeAIEmbeddings` | `backend/src/ingestion/embedder.py` | `[x]` |
+| 3.5 | Configure Gemini `models/embedding-001` model via GOOGLE_API_KEY | `backend/src/ingestion/embedder.py` | `[x]` |
+| 3.6 | Implement ChromaDB collection manager (create, upsert, delete, reset) | `backend/src/ingestion/vectorstore.py` | `[x]` |
+| 3.7 | Configure persistent storage at `$CHROMA_PERSIST_DIR` | `backend/src/ingestion/vectorstore.py` | `[x]` |
+| 3.8 | Create full ingestion function: scrape → clean → chunk → embed → store | `backend/src/ingestion/` | `[x]` |
+| 3.9 | Add re-ingestion support (clear collection + re-insert) | `backend/src/ingestion/vectorstore.py` | `[x]` |
+| 3.10 | Validate stored chunk count and sample retrieval | Manual verification | `[x]` |
 
 ### 3.3 Ingestion Flow
 
 ```mermaid
 flowchart LR
-    A["data/processed/*.json"] --> B["chunker.py\nRecursiveCharacterTextSplitter\n(500 chars, 50 overlap)"]
+    A["data/processed/*.json"] --> B["chunker.py\nSection-aware splitter\n(keep small sections whole)"]
     B --> C["List of Chunks\n+ Metadata Dicts"]
     C --> D["embedder.py\nBAAI/bge-large-en-v1.5\n(1024-dim vectors)"]
     D --> E["vectorstore.py\nChromaDB Upsert"]
     E --> F[("ChromaDB\nCollection: mf_facts")]
 ```
 
-### 3.4 Chunking Configuration
+### 3.4 Actual Data Profile (from scraped output)
 
-| Parameter | Value |
-|-----------|-------|
-| Splitter | `RecursiveCharacterTextSplitter` |
-| Chunk Size | 500 characters |
-| Chunk Overlap | 50 characters |
-| Separators | `["\n\n", "\n", ". ", " ", ""]` |
-| Metadata Fields | `scheme_name`, `section`, `source_url`, `scrape_date` |
+> [!IMPORTANT]
+> The actual scraped data is **much smaller** than originally estimated. The chunking strategy has been revised accordingly.
 
-### 3.5 Embedding Configuration
+| Metric | Value |
+|--------|-------|
+| Total schemes scraped | 5 |
+| Total sections across all schemes | 19 |
+| Total characters (all sections) | ~4,800 |
+| Average section size | ~252 chars |
+| Largest section type | `Fund Overview` (~865 chars) |
+| Smallest section type | `NAV & AUM` (~23 chars) |
+
+**Section size breakdown:**
+
+| Section Type | Count | Avg Chars | Range |
+|-------------|-------|-----------|-------|
+| Fund Overview | 4 (missing for Gold ETF FoF) | ~865 | 863–867 |
+| Fund Details | 5 | ~76 | 76–78 |
+| NAV & AUM | 5 | ~23 | 22–25 |
+| Tax Info | 5 | ~169 | 153–173 |
+
+### 3.5 Chunking Configuration (Revised)
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| Strategy | **Section-aware**: keep sections ≤ 500 chars whole; split only sections > 500 chars | Most sections are very short (23–173 chars). Splitting them would destroy meaning. |
+| Splitter (for large sections) | `RecursiveCharacterTextSplitter` | Only used for `Fund Overview` (~865 chars) |
+| Chunk Size (when splitting) | 500 characters | Balances context window with granularity |
+| Chunk Overlap (when splitting) | 50 characters | Maintains continuity across split boundaries |
+| Separators | `["\n\n", "\n", ". ", " ", ""]` | Natural text boundaries |
+| Metadata Fields | `scheme_name`, `section`, `source_url`, `scrape_date` | Carried from JSON into every chunk |
+
+**Estimated chunk count:** ~23 chunks (15 small sections kept whole + ~8 chunks from splitting 4 Fund Overview sections)
+
+> [!TIP]
+> If more data sources are added in the future (more schemes, more section types, FAQ sections), the chunk count will grow naturally. The section-aware strategy scales well — small sections stay whole, large ones get split.
+
+### 3.6 Embedding Configuration
 
 | Parameter | Value |
 |-----------|-------|
@@ -344,7 +373,7 @@ flowchart LR
 
 > **Important**: BGE models recommend adding the prefix `"Represent this sentence for searching relevant passages: "` to **queries only** (not documents) for optimal retrieval.
 
-### 3.6 ChromaDB Configuration
+### 3.7 ChromaDB Configuration
 
 | Parameter | Value |
 |-----------|-------|
@@ -353,10 +382,12 @@ flowchart LR
 | Distance Metric | Cosine |
 | ID Strategy | `{scheme_slug}_{section}_{chunk_index}` |
 
-### 3.7 Acceptance Criteria
+### 3.8 Acceptance Criteria
 
 - [ ] Ingestion pipeline runs end-to-end without errors
-- [ ] ChromaDB collection `mf_facts` contains 80–120 chunks
+- [ ] ChromaDB collection `mf_facts` contains ~19–30 chunks
+- [ ] Small sections (≤ 500 chars) are stored as single whole chunks
+- [ ] Large sections (> 500 chars, i.e. Fund Overview) are split with overlap
 - [ ] Each chunk has `scheme_name`, `section`, `source_url`, `scrape_date` metadata
 - [ ] Sample similarity query returns relevant results
 - [ ] Re-ingestion (clear + re-insert) works correctly
@@ -429,15 +460,56 @@ ADVISORY_KEYWORDS = [
 | **Performance** | "I don't provide performance data or return calculations. For the latest returns, please refer to the official factsheet at {source_url}." |
 | **Out of Scope** | "I can only answer factual questions about the 5 HDFC mutual fund schemes in my database. Please rephrase or visit [Groww](https://groww.in/mutual-funds) for other funds." |
 
-### 4.7 Retrieval Configuration
+### 4.7 Retrieval Strategy (Data-Informed)
 
-| Parameter | Value |
-|-----------|-------|
-| Search Type | Cosine similarity |
-| Top-K | 3 |
-| Score Threshold | 0.35 minimum |
-| Metadata Filter | `scheme_name` (when fund name is mentioned in query) |
-| Query Prefix | `"Represent this sentence for searching relevant passages: "` |
+> [!IMPORTANT]
+> The retrieval strategy has been revised based on analysis of the actual scraped data. The original plan assumed ~100 diverse chunks. In reality, we have **19 sections** with critical characteristics that demand a different approach.
+
+#### Problems discovered with pure cosine similarity search
+
+| Problem | Evidence | Impact |
+|---------|----------|--------|
+| **Tiny chunks** | 10 of 19 chunks are < 100 chars (5 are < 50 chars). `NAV & AUM` is just `"NAV: 28 Aug '26\n₹237.07"` (23 chars). | Short texts embed poorly — cosine distances collapse, all Fund Details chunks score ~equally for any "expense ratio" query regardless of scheme. |
+| **Near-duplicate Tax Info** | 4 of 5 Tax Info sections are **identical** (`"If you redeem within one year…"`). Only Gold ETF FoF differs. | A query like *"tax on HDFC Small Cap"* may return HDFC Large Cap's Tax Info — wrong scheme, right content. |
+| **Cross-scheme keyword overlap** | All Fund Details sections contain "Min. for SIP", "Expense ratio", "AUM". All Fund Overview sections contain "Minimum SIP Investment", "exit load". | Without metadata filtering, the top-3 results for *"expense ratio of HDFC Mid Cap"* include 4 other schemes. |
+
+#### Revised retrieval approach: **Metadata-first + semantic fallback**
+
+```mermaid
+flowchart TD
+    Q["User Query"] --> EX["1. Extract scheme name\n(fuzzy match against 5 known names)"]
+    EX -->|"Scheme found"| MF["2a. Metadata-filtered search\nWHERE scheme_name = extracted\nTop-K = 3"]
+    EX -->|"No scheme found"| US["2b. Unfiltered search\nAll chunks\nTop-K = 5"]
+    MF --> RES["3. Return matched chunks\n+ source_url from metadata"]
+    US --> RES
+```
+
+#### Retrieval Configuration
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| **Strategy** | Metadata-first (scheme_name filter) + semantic fallback | With only 19 chunks and heavy cross-scheme duplication, metadata filtering is **mandatory**, not optional. |
+| **Scheme extraction** | Fuzzy match query against 5 known scheme names | Handles variations like "HDFC mid cap", "midcap fund", "ELSS tax saver" |
+| **Top-K (filtered)** | 3 | When filtered to a single scheme, there are only 3–4 sections. Top-3 covers all. |
+| **Top-K (unfiltered)** | 5 | For generic queries without a scheme name, cast a wider net across all 19 chunks. |
+| **Score Threshold** | None (removed) | With very short chunks, absolute cosine scores are unreliable. Instead, rely on metadata filtering + LLM judgment. |
+| **Distance Metric** | Cosine | Unchanged. |
+| **Query Prefix** | `"Represent this sentence for searching relevant passages: "` | Required by BGE-large model for queries. |
+
+#### Scheme name extraction strategy
+
+```python
+SCHEME_ALIASES = {
+    "HDFC Mid Cap Fund": ["hdfc mid cap", "mid cap fund", "midcap"],
+    "HDFC Small Cap Fund": ["hdfc small cap", "small cap fund", "smallcap"],
+    "HDFC Gold ETF FoF": ["hdfc gold", "gold etf", "gold fund"],
+    "HDFC Large Cap Fund": ["hdfc large cap", "large cap fund", "largecap"],
+    "HDFC ELSS Tax Saver Fund": ["hdfc elss", "tax saver", "elss fund"],
+}
+```
+
+> [!TIP]
+> When a scheme name IS extracted, the retriever filters to that scheme's chunks only (3–4 results max). When NO scheme name is found, the query runs unfiltered across all 19 chunks. This is the single most important design decision — it prevents the "wrong scheme, right content" problem.
 
 ### 4.8 Acceptance Criteria
 
@@ -445,17 +517,20 @@ ADVISORY_KEYWORDS = [
 - [ ] Advisory queries ("Should I invest?", "Which is better?") are refused
 - [ ] Performance queries ("What are the returns?") are refused with factsheet link
 - [ ] Out-of-scope queries get polite refusal
-- [ ] Valid factual queries retrieve relevant chunks from correct scheme
+- [ ] Valid factual queries retrieve relevant chunks from **correct** scheme
+- [ ] Scheme name extraction correctly identifies all 5 schemes from natural language variations
 - [ ] Metadata filter correctly narrows results when fund name is mentioned
-- [ ] Queries below similarity threshold return "information not available" response
+- [ ] Queries mentioning a scheme return chunks ONLY from that scheme (no cross-scheme leakage)
+- [ ] Queries without a scheme name return results from the most semantically relevant scheme(s)
+- [ ] Near-duplicate Tax Info sections resolve to the correct scheme via metadata filter
 
 ---
 
-## Phase 5: Backend API (FastAPI + Groq LLM)
+## Phase 5: Backend API (FastAPI) [Completed]
 
 ### 5.1 Objective
 
-Build the FastAPI server with query and ingestion endpoints, integrate Groq LLM (`openai/gpt-oss-120b`), implement the facts-only system prompt, and build the response formatter that enforces the 3-sentence + 1-citation + footer contract.
+Build the FastAPI server with query and ingestion endpoints, integrate Groq LLM (`openai/gpt-oss-120b`), implement the facts-only system prompt, and build the response formatter that enforces the 3-sentence + 1-citation + footer contract (Updated: 2026-08-30).
 
 ### 5.2 Tasks
 
@@ -613,22 +688,22 @@ Build a minimal, clean chat interface using HTML/CSS/JavaScript. The frontend ca
 
 | # | Task | File(s) | Status |
 |---|------|---------|--------|
-| 6.1 | Create main HTML page with chat structure | `frontend/index.html` | `[ ]` |
-| 6.2 | Implement chat CSS (message bubbles, layout, responsive) | `frontend/css/style.css` | `[ ]` |
-| 6.3 | Add persistent disclaimer banner: "Facts-only. No investment advice." | `frontend/index.html` | `[ ]` |
-| 6.4 | Add welcome message in chat area | `frontend/js/app.js` | `[ ]` |
-| 6.5 | Add 3 example question buttons (clickable quick-prompts) | `frontend/index.html` | `[ ]` |
-| 6.6 | Implement chat input with send button + Enter key support | `frontend/js/app.js` | `[ ]` |
-| 6.7 | Implement API client (`fetch` to Railway backend `POST /api/query`) | `frontend/js/app.js` | `[ ]` |
-| 6.8 | Render user messages (right-aligned bubble) | `frontend/js/app.js` | `[ ]` |
-| 6.9 | Render assistant messages (left-aligned bubble with source + footer) | `frontend/js/app.js` | `[ ]` |
-| 6.10 | Add typing indicator / loading spinner during API calls | `frontend/js/app.js` | `[ ]` |
-| 6.11 | Format source links as clickable `<a>` tags in responses | `frontend/js/app.js` | `[ ]` |
-| 6.12 | Handle errors (network failure, backend unavailable) | `frontend/js/app.js` | `[ ]` |
-| 6.13 | Create Vercel config | `frontend/vercel.json` | `[ ]` |
-| 6.14 | Test locally with `python3 -m http.server 5500` (from `frontend/` dir) | Manual | `[ ]` |
-| 6.15 | Test locally with VS Code Live Server (port 5500) | Manual | `[ ]` |
-| 6.16 | Verify end-to-end locally: frontend → backend → Groq → response | Manual | `[ ]` |
+| 6.1 | Create main HTML page with chat structure | `frontend/index.html` | `[x]` |
+| 6.2 | Implement chat CSS (message bubbles, layout, responsive) | `frontend/css/style.css` | `[x]` |
+| 6.3 | Add persistent disclaimer banner: "Facts-only. No investment advice." | `frontend/index.html` | `[x]` |
+| 6.4 | Add welcome message in chat area | `frontend/js/app.js` | `[x]` |
+| 6.5 | Add 3 example question buttons (clickable quick-prompts) | `frontend/index.html` | `[x]` |
+| 6.6 | Implement chat input with send button + Enter key support | `frontend/js/app.js` | `[x]` |
+| 6.7 | Implement API client (`fetch` to Railway backend `POST /api/query`) | `frontend/js/app.js` | `[x]` |
+| 6.8 | Render user messages (right-aligned bubble) | `frontend/js/app.js` | `[x]` |
+| 6.9 | Render assistant messages (left-aligned bubble with source + footer) | `frontend/js/app.js` | `[x]` |
+| 6.10 | Add typing indicator / loading spinner during API calls | `frontend/js/app.js` | `[x]` |
+| 6.11 | Format source links as clickable `<a>` tags in responses | `frontend/js/app.js` | `[x]` |
+| 6.12 | Handle errors (network failure, backend unavailable) | `frontend/js/app.js` | `[x]` |
+| 6.13 | Create Vercel config | `frontend/vercel.json` | `[x]` |
+| 6.14 | Test locally with `python3 -m http.server 5500` (from `frontend/` dir) | Manual | `[x]` |
+| 6.15 | Test locally with VS Code Live Server (port 5500) | Manual | `[x]` |
+| 6.16 | Verify end-to-end locally: frontend → backend → Groq → response | Manual | `[x]` |
 
 ### 6.3 UI Wireframe
 
@@ -699,15 +774,6 @@ async function queryAssistant(userQuery) {
 
 ### 6.7 Acceptance Criteria
 
-- [ ] Chat page loads and displays welcome message + disclaimer
-- [ ] 3 example question buttons work and trigger queries
-- [ ] User messages render as right-aligned bubbles
-- [ ] Bot responses render as left-aligned bubbles with source link + footer
-- [ ] Loading indicator appears during API calls
-- [ ] Network errors show user-friendly message
-- [ ] Source links are clickable in responses
-- [ ] UI is clean, responsive, and minimal
-- [ ] Works locally via `python3 -m http.server 5500` or VS Code Live Server
 - [ ] End-to-end local flow works: frontend (localhost:5500) → backend (localhost:8000) → Groq → response
 
 ---
@@ -722,12 +788,12 @@ Set up the GitHub Actions workflow that triggers daily data ingestion at 10 AM I
 
 | # | Task | File(s) | Status |
 |---|------|---------|--------|
-| 7.1 | Create GitHub Actions workflow file | `.github/workflows/scheduled-ingestion.yml` | `[ ]` |
-| 7.2 | Configure cron schedule: `30 4 * * *` (4:30 AM UTC = 10 AM IST) | `.github/workflows/scheduled-ingestion.yml` | `[ ]` |
-| 7.3 | Add `workflow_dispatch` for manual trigger | `.github/workflows/scheduled-ingestion.yml` | `[ ]` |
-| 7.4 | Implement curl call to Railway `/api/ingest/refresh` with Bearer token | `.github/workflows/scheduled-ingestion.yml` | `[ ]` |
-| 7.5 | Add failure notification step | `.github/workflows/scheduled-ingestion.yml` | `[ ]` |
-| 7.6 | Configure GitHub Secrets: `RAILWAY_BACKEND_URL`, `INGEST_API_KEY` | GitHub Settings → Secrets | `[ ]` |
+| 7.1 | Create GitHub Actions workflow file | `.github/workflows/scheduled-ingestion.yml` | `[x]` |
+| 7.2 | Configure cron schedule: `30 4 * * *` (4:30 AM UTC = 10 AM IST) | `.github/workflows/scheduled-ingestion.yml` | `[x]` |
+| 7.3 | Add `workflow_dispatch` for manual trigger | `.github/workflows/scheduled-ingestion.yml` | `[x]` |
+| 7.4 | Implement curl call to Railway `/api/ingest/refresh` with Bearer token | `.github/workflows/scheduled-ingestion.yml` | `[x]` |
+| 7.5 | Add failure notification step | `.github/workflows/scheduled-ingestion.yml` | `[x]` |
+| 7.6 | Configure GitHub Secrets: `RAILWAY_BACKEND_URL`, `INGEST_API_KEY` | GitHub Settings → Secrets | `[x]` |
 | 7.7 | Test with `workflow_dispatch` (manual trigger from GitHub UI) | Manual verification | `[ ]` |
 | 7.8 | Verify daily cron fires correctly | Wait for next 10 AM IST | `[ ]` |
 
@@ -811,13 +877,13 @@ Verify the complete system works locally on your Mac (backend + frontend + inges
 
 | # | Task | Action | Status |
 |---|------|--------|--------|
-| 8.1 | Start backend locally: `cd backend && uvicorn src.main:app --reload --port 8000` | Terminal 1 | `[ ]` |
-| 8.2 | Verify health: `curl http://localhost:8000/api/health` | `curl` | `[ ]` |
-| 8.3 | Run local ingestion: `curl -X POST http://localhost:8000/api/ingest/refresh -H "Authorization: Bearer $INGEST_API_KEY"` | `curl` | `[ ]` |
-| 8.4 | Start frontend locally: `cd frontend && python3 -m http.server 5500` | Terminal 2 | `[ ]` |
-| 8.5 | Test end-to-end locally: open `http://localhost:5500`, ask a question | Browser | `[ ]` |
-| 8.6 | Verify all guardrails work locally (PII, advisory, scope refusals) | Browser | `[ ]` |
-| 8.7 | Stop backend (`Ctrl+C`) and frontend (`Ctrl+C`), deactivate venv (`deactivate`) | Terminals | `[ ]` |
+| 8.1 | Start backend locally: `cd backend && uvicorn src.main:app --reload --port 8000` | Terminal 1 | `[x]` |
+| 8.2 | Verify health: `curl http://localhost:8000/api/health` | `curl` | `[x]` |
+| 8.3 | Run local ingestion: `curl -X POST http://localhost:8000/api/ingest/refresh -H "Authorization: Bearer $INGEST_API_KEY"` | `curl` | `[x]` |
+| 8.4 | Start frontend locally: `cd frontend && python3 -m http.server 5500` | Terminal 2 | `[x]` |
+| 8.5 | Test end-to-end locally: open `http://localhost:5500`, ask a question | Browser | `[x]` |
+| 8.6 | Verify all guardrails work locally (PII, advisory, scope refusals) | Browser | `[x]` |
+| 8.7 | Stop backend (`Ctrl+C`) and frontend (`Ctrl+C`), deactivate venv (`deactivate`) | Terminals | `[x]` |
 
 > **Reference**: See [architecture.md §12 (Local Development)](file:///Users/gkondave/Documents/Python/Agents/Antigravity/RAG-Chatbot/docs/architecture.md) for detailed start/stop commands.
 

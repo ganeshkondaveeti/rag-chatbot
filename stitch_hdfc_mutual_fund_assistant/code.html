@@ -1,0 +1,428 @@
+<!DOCTYPE html><html class="" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#ffffff","tertiary-container":"#2d3438","on-background":"#181c1e","surface-container-high":"#e5e9eb","on-primary-fixed":"#001b3c","background":"#f7fafc","error-container":"#ffdad6","on-surface-variant":"#43474f","on-error":"#ffffff","on-tertiary":"#ffffff","on-primary":"#ffffff","surface-container-lowest":"#ffffff","secondary-fixed":"#d6e3ff","tertiary-fixed":"#dce3e8","on-secondary-container":"#0f4787","surface":"#f7fafc","on-tertiary-fixed-variant":"#41484c","surface-container-highest":"#e0e3e5","error":"#ba1a1a","inverse-on-surface":"#eef1f3","inverse-surface":"#2d3133","on-error-container":"#93000a","on-surface":"#181c1e","surface-variant":"#e0e3e5","on-primary-container":"#799dd6","on-tertiary-container":"#959ca1","surface-container":"#ebeef0","primary":"#001e40","secondary-container":"#8cb7ff","on-primary-fixed-variant":"#1f477b","outline-variant":"#c3c6d1","on-tertiary-fixed":"#161d20","tertiary":"#181f23","surface-dim":"#d7dadc","secondary":"#305ea0","secondary-fixed-dim":"#a9c7ff","outline":"#737780","surface-tint":"#3a5f94","primary-fixed":"#d5e3ff","on-secondary-fixed":"#001b3d","surface-container-low":"#f1f4f6","primary-fixed-dim":"#a7c8ff","on-secondary-fixed-variant":"#0e4686","primary-container":"#003366","surface-bright":"#f7fafc","inverse-primary":"#a7c8ff","tertiary-fixed-dim":"#c0c7cc"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"24px","base":"8px","container-max":"1200px","margin-desktop":"40px","margin-mobile":"16px"},"fontFamily":{"body-lg":["Inter"],"body-md":["Inter"],"label-md":["Inter"],"caption":["Inter"],"title-md":["Inter"],"display-lg":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"caption":["12px",{"lineHeight":"16px","fontWeight":"400"}],"title-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"600"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background dark:bg-gray-900 font-body-md text-on-background dark:text-gray-100"><header class="fixed top-0 w-full z-50 bg-surface dark:bg-gray-800 shadow-[0_4px_20px_rgba(0,51,102,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.5)]"><div class="h-20 max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between"><div class="flex-1"></div><div class="flex flex-col items-center text-center"><h1 class="font-headline-lg-mobile text-headline-lg-mobile lg:font-title-md lg:text-title-md text-primary dark:text-primary-fixed">🏦 Mutual Fund FAQ Assistant</h1><span class="font-caption text-caption text-on-surface-variant dark:text-gray-400">AI-Powered Factual Data</span></div><div class="flex-1 flex justify-end items-center gap-4"><nav class="hidden md:flex items-center gap-gutter mr-4" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors text-primary dark:text-primary-fixed font-bold" data-path="chat-assistant" href="#">Assistant</a><a class="font-label-md text-label-md text-on-surface-variant dark:text-gray-400 hover:text-primary dark:hover:text-primary-fixed transition-colors" data-path="legal-disclaimer" href="#">Disclaimer</a></nav><div class="w-8 h-8 rounded-full bg-primary dark:bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary dark:text-on-primary-container text-[18px]">person</span></div></div></div></header>
+<main class="w-full pt-20 min-h-screen flex flex-col md:flex-row">
+<!-- Sidebar -->
+<aside class="hidden md:flex flex-col w-64 lg:w-72 bg-surface-container-low dark:bg-gray-800/50 border-r border-outline-variant/30 dark:border-gray-700 h-[calc(100vh-80px)] sticky top-20 flex-shrink-0 z-40">
+<div class="p-4 border-b border-outline-variant/20 dark:border-gray-700">
+<button class="w-full flex items-center justify-center gap-3 bg-primary text-on-primary py-4 px-6 rounded-xl hover:bg-primary/90 dark:bg-primary-container dark:text-on-primary-container dark:hover:bg-primary-container/90 transition-all duration-300 shadow-xl shadow-primary/20 dark:shadow-none ring-1 ring-primary-fixed/30 hover:scale-[1.02] active:scale-95 group">
+<span class="material-symbols-outlined text-[24px] font-bold">add</span>
+<span class="font-label-md font-bold tracking-wide">New Chat</span>
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">New Chat</div></button>
+</div>
+<div class="flex-1 overflow-y-auto py-2 flex flex-col">
+<h3 class="px-4 py-2 font-caption text-on-surface-variant dark:text-gray-400 uppercase tracking-wider text-xs font-semibold">Recent Conversations</h3>
+<nav class="flex flex-col gap-1 px-2 mb-auto relative">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md hover:bg-surface-container-high dark:hover:bg-gray-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 group-hover:text-primary dark:group-hover:text-primary-fixed text-[18px]">chat_bubble_outline</span>
+<span class="font-body-md text-on-surface dark:text-gray-200 truncate">HDFC Mid Cap Ratio</span>
+<div class="absolute left-full ml-2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">HDFC Mid Cap Ratio</div></a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md hover:bg-surface-container-high dark:hover:bg-gray-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 group-hover:text-primary dark:group-hover:text-primary-fixed text-[18px]">chat_bubble_outline</span>
+<span class="font-body-md text-on-surface dark:text-gray-200 truncate">ELSS Exit Load</span>
+<div class="absolute left-full ml-2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">ELSS Exit Load</div></a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-md hover:bg-surface-container-high dark:hover:bg-gray-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 group-hover:text-primary dark:group-hover:text-primary-fixed text-[18px]">chat_bubble_outline</span>
+<span class="font-body-md text-on-surface dark:text-gray-200 truncate">SIP Minimums</span>
+<div class="absolute left-full ml-2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">SIP Minimums</div></a>
+</nav>
+<div class="p-4 border-t border-outline-variant/20 dark:border-gray-700 mt-4 relative"><button class="w-full flex items-center justify-start gap-3 px-3 py-2.5 mb-2 rounded-md hover:bg-error-container/10 dark:hover:bg-red-900/20 transition-colors group text-error dark:text-red-400" id="clear-history-btn"><span class="material-symbols-outlined text-[18px]">delete_sweep</span><span class="font-body-md">Clear History</span><div class="absolute left-full ml-2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">Clear History</div></button>
+<button class="w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-md hover:bg-surface-container-high dark:hover:bg-gray-700/50 transition-colors group" id="theme-toggle">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 group-hover:text-primary dark:group-hover:text-primary-fixed text-[18px]" id="theme-icon">dark_mode</span>
+<span class="font-body-md text-on-surface dark:text-gray-200" id="theme-text">Dark Mode</span>
+<div class="absolute left-full ml-2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">Toggle Theme</div></button>
+</div>
+</div>
+</aside>
+<div class="flex flex-col w-full h-[calc(100vh-80px)] relative font-body-md text-on-background dark:text-gray-100">
+<!-- Disclaimer Banner -->
+<div class="w-full bg-error-container/20 dark:bg-error-container/10 border-b border-error/10 dark:border-error/20 py-3 px-margin-mobile lg:px-margin-desktop flex items-center justify-center gap-3 shrink-0 z-10 backdrop-blur-sm sticky top-0">
+<span class="material-symbols-outlined text-error dark:text-red-400 text-[20px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="font-label-md text-on-surface-variant dark:text-gray-300 m-0">Facts-only. No investment advice.</p>
+</div>
+<!-- Main Chat Container -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden relative scroll-smooth flex flex-col items-center w-full" id="chat-container">
+<!-- Abstract Background Decoration -->
+<div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply dark:mix-blend-screen dark:opacity-10 flex justify-center -z-10">
+<svg class="w-full h-full text-primary-fixed-dim/20 dark:text-primary-fixed/30 fill-current animate-[spin_120s_linear_infinite]" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+<path d="M48.5,-63.3C62.1,-52.1,72.1,-36.8,77.7,-19.7C83.3,-2.6,84.4,16.2,76.5,31.4C68.6,46.6,51.7,58.3,34.2,65.3C16.6,72.4,-1.7,74.9,-20.2,71.7C-38.6,68.6,-57.2,59.8,-68.8,45.2C-80.4,30.5,-85,10,-81.4,-8.4C-77.8,-26.8,-66,-43.2,-51,-54.6C-36.1,-66,-18,-72.4,-0.2,-72.2C17.7,-71.9,35,-65,48.5,-63.3Z" transform="translate(500 500) scale(4)"></path>
+</svg>
+</div>
+<!-- Chat Content Area constrained width -->
+<div class="w-full max-w-[800px] flex flex-col gap-6 p-margin-mobile lg:p-margin-desktop min-h-full pb-32" id="message-list">
+<!-- Welcome Header (Only visible initially) -->
+<div class="flex flex-col items-center justify-center text-center py-12 px-4 fade-in-up" id="welcome-section">
+<div class="w-16 h-16 rounded-2xl bg-primary dark:bg-primary-container flex items-center justify-center mb-6 shadow-xl shadow-primary/20 dark:shadow-none ring-4 ring-primary-fixed/30 dark:ring-primary-fixed/10">
+<span class="material-symbols-outlined text-on-primary dark:text-on-primary-container text-[32px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<h2 class="font-headline-lg-mobile lg:font-headline-lg text-primary dark:text-primary-fixed mb-2">How can I help you today?</h2>
+<p class="font-body-md text-on-surface-variant dark:text-gray-400 max-w-md mx-auto mb-8">I can answer factual questions about HDFC mutual fund schemes on Groww.</p>
+<!-- Quick Prompts -->
+<div class="flex flex-col w-full gap-3">
+<p class="font-label-md text-on-surface-variant/70 dark:text-gray-500 uppercase tracking-widest text-xs text-left mb-2 pl-2">💡 Try asking:</p>
+<button class="quick-prompt-btn group flex items-start gap-4 p-4 rounded-xl bg-surface-container-low dark:bg-gray-800/80 hover:bg-secondary-fixed/50 dark:hover:bg-gray-700 transition-all duration-300 text-left relative overflow-hidden" data-prompt="What is the expense ratio of HDFC Mid Cap Fund?">
+<div class="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary-fixed/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 dark:group-hover:bg-primary-fixed/20 transition-colors">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed text-[16px]">percent</span>
+</div>
+<span class="font-body-md text-on-surface dark:text-gray-200 flex-1 mt-1">What is the expense ratio of HDFC Mid Cap Fund?</span>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all mt-1">arrow_forward</span>
+</button>
+<button class="quick-prompt-btn group flex items-start gap-4 p-4 rounded-xl bg-surface-container-low dark:bg-gray-800/80 hover:bg-secondary-fixed/50 dark:hover:bg-gray-700 transition-all duration-300 text-left relative overflow-hidden" data-prompt="What is the exit load for HDFC ELSS Tax Saver Fund?">
+<div class="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary-fixed/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 dark:group-hover:bg-primary-fixed/20 transition-colors">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed text-[16px]">output</span>
+</div>
+<span class="font-body-md text-on-surface dark:text-gray-200 flex-1 mt-1">What is the exit load for HDFC ELSS Tax Saver Fund?</span>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all mt-1">arrow_forward</span>
+</button>
+<button class="quick-prompt-btn group flex items-start gap-4 p-4 rounded-xl bg-surface-container-low dark:bg-gray-800/80 hover:bg-secondary-fixed/50 dark:hover:bg-gray-700 transition-all duration-300 text-left relative overflow-hidden" data-prompt="What is the minimum SIP amount for HDFC Large Cap Fund?">
+<div class="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary-fixed/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 dark:group-hover:bg-primary-fixed/20 transition-colors">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed text-[16px]">payments</span>
+</div>
+<span class="font-body-md text-on-surface dark:text-gray-200 flex-1 mt-1">What is the minimum SIP amount for HDFC Large Cap Fund?</span>
+<span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all mt-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Messages will be injected here -->
+</div>
+</div>
+<!-- Input Area Container (Fixed bottom) -->
+<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background via-background/95 to-transparent dark:from-gray-900 dark:via-gray-900/95 pt-12 pb-margin-mobile lg:pb-margin-desktop px-margin-mobile lg:px-margin-desktop flex justify-center z-20 pointer-events-none">
+<div class="w-full max-w-[800px] pointer-events-auto">
+<form class="relative flex items-end w-full rounded-2xl bg-surface dark:bg-gray-800 shadow-[0_8px_30px_rgba(0,51,102,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none ring-1 ring-outline-variant/30 dark:ring-gray-700 transition-all duration-300 focus-within:ring-2 focus-within:ring-secondary dark:focus-within:ring-primary-fixed focus-within:shadow-[0_8px_40px_rgba(48,94,160,0.2)] dark:focus-within:shadow-[0_8px_40px_rgba(0,0,0,0.5)]" id="chat-form">
+<textarea class="w-full bg-transparent border-none outline-none resize-none font-body-md text-on-surface dark:text-gray-100 px-6 py-4 min-h-[56px] max-h-[150px] scrollbar-hide placeholder:text-on-surface-variant/50 dark:placeholder:text-gray-500 flex-1 leading-relaxed" id="chat-input" placeholder="Type your question..." rows="1"></textarea>
+<button class="p-4 shrink-0 text-primary dark:text-primary-fixed hover:text-secondary dark:hover:text-primary-fixed-dim disabled:text-outline-variant dark:disabled:text-gray-600 disabled:cursor-not-allowed transition-colors group relative" id="send-btn" type="submit">
+<div class="w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-primary/5 dark:group-hover:bg-primary-fixed/10 transition-colors">
+<span class="material-symbols-outlined transform group-hover:translate-x-1 group-active:scale-95 transition-all" style="font-variation-settings: 'FILL' 1;">send</span>
+</div>
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 bg-inverse-surface text-inverse-on-surface text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">Send message</div></button>
+</form>
+<div class="text-center mt-3">
+<span class="font-caption text-caption text-on-surface-variant/60 dark:text-gray-500">Responses are generated by AI and may be inaccurate.</span>
+</div>
+</div>
+</div>
+</div>
+<style>
+    .fade-in-up {
+        animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .message-enter {
+        animation: messageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes messageEnter {
+        from { opacity: 0; transform: translateY(10px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    
+    .typing-dot {
+        animation: typingBounce 1.4s infinite ease-in-out both;
+    }
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    
+    @keyframes typingBounce {
+        0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+        40% { transform: scale(1); opacity: 1; }
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    /* Prose styling for assistant responses */
+    .assistant-prose p { margin-bottom: 0.75em; }
+    .assistant-prose p:last-child { margin-bottom: 0; }
+    .assistant-prose a { color: #305ea0; text-decoration: underline; text-decoration-color: rgba(48,94,160,0.4); text-underline-offset: 4px; transition: all 0.2s; }
+    html.dark .assistant-prose a { color: #a7c8ff; text-decoration-color: rgba(167,200,255,0.4); }
+    .assistant-prose a:hover { text-decoration-color: #305ea0; }
+    html.dark .assistant-prose a:hover { text-decoration-color: #a7c8ff; }
+    .assistant-prose ul { margin-bottom: 0.75em; padding-left: 1.5em; list-style-type: disc; }
+    .assistant-prose strong { font-weight: 600; color: #001e40; }
+    html.dark .assistant-prose strong { color: #ffffff; }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const messageList = document.getElementById('message-list');
+        const welcomeSection = document.getElementById('welcome-section');
+        const chatContainer = document.getElementById('chat-container');
+        const sendBtn = document.getElementById('send-btn');
+        const quickPromptBtns = document.querySelectorAll('.quick-prompt-btn');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+        const html = document.documentElement;
+
+        let isWaitingForResponse = false;
+        
+        // Theme Toggle Logic
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.textContent = 'dark_mode';
+                themeText.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                themeIcon.textContent = 'light_mode';
+                themeText.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Theme from localStorage or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            themeIcon.textContent = 'light_mode';
+            themeText.textContent = 'Light Mode';
+        } else {
+            html.classList.remove('dark');
+            themeIcon.textContent = 'dark_mode';
+            themeText.textContent = 'Dark Mode';
+        }
+
+        // Auto-resize textarea
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+            updateSendButtonState();
+        });
+
+        // Handle Enter key (Shift+Enter for new line)
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (!isWaitingForResponse && this.value.trim() !== '') {
+                    handleSubmission(this.value);
+                }
+            }
+        });
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!isWaitingForResponse && chatInput.value.trim() !== '') {
+                handleSubmission(chatInput.value);
+            }
+        });
+
+        quickPromptBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!isWaitingForResponse) {
+                    const prompt = btn.getAttribute('data-prompt');
+                    handleSubmission(prompt);
+                }
+            });
+        });
+
+        function updateSendButtonState() {
+            if (chatInput.value.trim() === '' || isWaitingForResponse) {
+                sendBtn.disabled = true;
+            } else {
+                sendBtn.disabled = false;
+            }
+        }
+
+        function scrollToBottom() {
+            chatContainer.scrollTo({
+                top: chatContainer.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function createMessageBubble(content, isUser) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex w-full message-enter ${isUser ? 'justify-end' : 'justify-start'}`;
+            
+            const innerContainer = document.createElement('div');
+            innerContainer.className = `flex max-w-[85%] gap-4 ${isUser ? 'flex-row-reverse' : 'flex-row'}`;
+
+            // Avatar
+            const avatar = document.createElement('div');
+            avatar.className = `w-8 h-8 rounded-full shrink-0 flex items-center justify-center mt-1 shadow-sm`;
+            if (isUser) {
+                avatar.className += ' bg-tertiary-fixed dark:bg-gray-700';
+                avatar.innerHTML = `<span class="material-symbols-outlined text-on-tertiary-fixed dark:text-gray-200 text-[18px]">person</span>`;
+            } else {
+                avatar.className += ' bg-primary dark:bg-primary-container shadow-[0_4px_12px_rgba(0,51,102,0.15)] dark:shadow-none';
+                avatar.innerHTML = `<span class="material-symbols-outlined text-on-primary dark:text-on-primary-container text-[18px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>`;
+            }
+
+            // Bubble
+            const bubble = document.createElement('div');
+            if (isUser) {
+                bubble.className = 'bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-2xl rounded-tr-sm px-5 py-3 shadow-[0_4px_20px_rgba(0,51,102,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]';
+                bubble.innerHTML = `<p class="font-body-md whitespace-pre-wrap">${escapeHtml(content)}</p>`;
+            } else {
+                bubble.className = 'bg-surface-container-lowest dark:bg-gray-800 text-on-surface dark:text-gray-200 rounded-2xl rounded-tl-sm px-6 py-4 shadow-[0_4px_20px_rgba(0,51,102,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] ring-1 ring-outline-variant/20 dark:ring-gray-700';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'assistant-prose font-body-md text-on-surface dark:text-gray-200';
+                contentDiv.innerHTML = formatAssistantResponse(content.answer);
+                bubble.appendChild(contentDiv);
+
+                if (content.sources && content.sources.length > 0) {
+                    const sourcesDiv = document.createElement('div');
+                    sourcesDiv.className = 'mt-4 pt-3 border-t border-outline-variant/20 dark:border-gray-700 flex flex-wrap gap-2 items-center';
+                    sourcesDiv.innerHTML = `<span class="font-label-md text-on-surface-variant dark:text-gray-400 text-xs uppercase tracking-wider">Sources:</span>`;
+                    
+                    content.sources.forEach(src => {
+                        const link = document.createElement('a');
+                        link.href = src.url || '#';
+                        link.className = 'inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container-low dark:bg-gray-700 hover:bg-secondary-fixed/40 dark:hover:bg-gray-600 transition-colors font-caption text-secondary dark:text-primary-fixed no-underline';
+                        link.innerHTML = `<span class="material-symbols-outlined text-[14px]">link</span> ${escapeHtml(src.title || 'Source')}`;
+                        link.target = '_blank';
+                        sourcesDiv.appendChild(link);
+                    });
+                    bubble.appendChild(sourcesDiv);
+                }
+
+                // Mandatory Disclaimer
+                const disclaimerDiv = document.createElement('div');
+                disclaimerDiv.className = 'mt-4 bg-surface-container-low dark:bg-gray-700/50 rounded-lg p-3 flex items-start gap-2';
+                disclaimerDiv.innerHTML = `
+                    <span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400 text-[16px] shrink-0 mt-0.5">info</span>
+                    <p class="font-caption text-on-surface-variant dark:text-gray-400 text-[11px] leading-tight m-0">Disclaimer: The information provided is factual data extracted from Groww based on recent scrapes. It does not constitute financial advice or investment recommendations.</p>
+                `;
+                bubble.appendChild(disclaimerDiv);
+            }
+
+            innerContainer.appendChild(avatar);
+            innerContainer.appendChild(bubble);
+            wrapper.appendChild(innerContainer);
+
+            return wrapper;
+        }
+
+        function createTypingIndicator() {
+            const wrapper = document.createElement('div');
+            wrapper.id = 'typing-indicator';
+            wrapper.className = `flex w-full justify-start message-enter`;
+            
+            const innerContainer = document.createElement('div');
+            innerContainer.className = `flex max-w-[85%] gap-4 flex-row`;
+
+            const avatar = document.createElement('div');
+            avatar.className = `w-8 h-8 rounded-full shrink-0 flex items-center justify-center mt-1 bg-primary dark:bg-primary-container shadow-sm`;
+            avatar.innerHTML = `<span class="material-symbols-outlined text-on-primary dark:text-on-primary-container text-[18px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>`;
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bg-surface-container-lowest dark:bg-gray-800 rounded-2xl rounded-tl-sm px-5 py-4 shadow-[0_4px_20px_rgba(0,51,102,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] ring-1 ring-outline-variant/20 dark:ring-gray-700 flex items-center gap-1.5 h-[48px]';
+            
+            for(let i=0; i<3; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'w-2 h-2 rounded-full bg-primary/40 dark:bg-primary-fixed/40 typing-dot';
+                bubble.appendChild(dot);
+            }
+
+            innerContainer.appendChild(avatar);
+            innerContainer.appendChild(bubble);
+            wrapper.appendChild(innerContainer);
+
+            return wrapper;
+        }
+
+        function escapeHtml(unsafe) {
+            return (unsafe || '').toString()
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        function formatAssistantResponse(text) {
+            if (!text) return '';
+            // Basic markdown-like link parsing: [text](url)
+            let formatted = escapeHtml(text);
+            formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+            // Line breaks
+            formatted = formatted.replace(/\n/g, '<br/>');
+            return formatted;
+        }
+
+        async function handleSubmission(query) {
+            if (welcomeSection) {
+                welcomeSection.style.display = 'none';
+            }
+
+            // Add user message
+            const userMsg = createMessageBubble(query, true);
+            messageList.appendChild(userMsg);
+            
+            // Clear input and reset height
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            isWaitingForResponse = true;
+            updateSendButtonState();
+            scrollToBottom();
+
+            // Add typing indicator
+            const typingIndicator = createTypingIndicator();
+            messageList.appendChild(typingIndicator);
+            scrollToBottom();
+
+            try {
+                // Simulated API Call
+                // const response = await fetch('http://localhost:8000/api/query', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ query: query })
+                // });
+                // const data = await response.json();
+                
+                // Mock Network Delay & Response
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                let mockData = {
+                    answer: "Based on the latest data from Groww, the **HDFC Mid Cap Opportunities Fund** has an expense ratio of **0.84%** (Direct Plan). \n\nPlease note that expense ratios are subject to change by the AMC.",
+                    sources: [
+                        { title: "Groww - HDFC Mid Cap", url: "#" },
+                        { title: "AMC Disclosure", url: "#" }
+                    ]
+                };
+
+                if(query.toLowerCase().includes('error')) { throw new Error("Simulated network failure"); }
+
+                // Remove typing indicator
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+
+                // Add assistant response
+                const assistantMsg = createMessageBubble(mockData, false);
+                messageList.appendChild(assistantMsg);
+
+            } catch (error) {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+
+                const errorMsg = createMessageBubble({
+                    answer: "I apologize, but I encountered a network error while trying to retrieve that information. Please try again in a moment.",
+                    sources: []
+                }, false);
+                // Add error styling manually
+                errorMsg.querySelector('.bg-surface-container-lowest').classList.add('ring-error/50', 'bg-error-container/10', 'dark:ring-red-500/50', 'dark:bg-red-900/10');
+                
+                messageList.appendChild(errorMsg);
+            } finally {
+                isWaitingForResponse = false;
+                updateSendButtonState();
+                scrollToBottom();
+                chatInput.focus();
+            }
+        }
+        
+        // Initial state
+        updateSendButtonState();
+    });
+</script></main><footer class="w-full bg-surface-container-low dark:bg-gray-800/80 py-gutter mt-auto"><div class="max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4"><div class="font-caption text-caption text-on-surface-variant dark:text-gray-400">© 2024 Institutional Wealth Management Systems</div><div class="flex gap-gutter items-center"><a class="font-caption text-caption text-on-surface-variant dark:text-gray-400 hover:text-secondary dark:hover:text-primary-fixed" href="#">Security Protocol</a><a class="font-caption text-caption text-on-surface-variant dark:text-gray-400 hover:text-secondary dark:hover:text-primary-fixed" href="#">Terms of Service</a></div></div></footer>
+
+<script class="">document.getElementById('clear-history-btn')?.addEventListener('click', () => { const nav = document.querySelector('aside nav'); if (nav) { nav.innerHTML = '<div class="px-4 py-2 text-caption text-on-surface-variant/50 italic">No recent chats</div>'; } });</script></body></html>
