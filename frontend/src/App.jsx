@@ -14,6 +14,7 @@ function App() {
   
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
+  const wasTypingRef = useRef(false);
 
   // Save conversation whenever messages change
   useEffect(() => {
@@ -98,7 +99,23 @@ function App() {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (isTyping) {
+      wasTypingRef.current = true;
+      scrollToBottom();
+    } else {
+      if (wasTypingRef.current) {
+        wasTypingRef.current = false;
+        const lastMsgIndex = messages.length - 1;
+        if (lastMsgIndex >= 0) {
+          const msgEl = document.getElementById(`message-${lastMsgIndex}`);
+          if (msgEl) {
+            msgEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+            return;
+          }
+        }
+      }
+      scrollToBottom();
+    }
   }, [messages, isTyping]);
 
   const handleInputChange = (e) => {
@@ -327,7 +344,7 @@ function App() {
               {messages.map((msg, index) => {
                 const isUser = msg.role === 'user';
                 return (
-                  <div key={index} className={`flex w-full animate-[fadeInUp_0.4s_ease-out_forwards] ${isUser ? 'justify-end' : 'justify-start'}`}>
+                  <div id={`message-${index}`} key={index} className={`flex w-full animate-[fadeInUp_0.4s_ease-out_forwards] ${isUser ? 'justify-end' : 'justify-start'}`}>
                     <div className={`flex max-w-[85%] gap-4 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
                       {/* Avatar */}
                       <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center mt-1 shadow-sm ${isUser ? 'bg-tertiary-fixed dark:bg-gray-700' : 'bg-primary dark:bg-primary-container'}`}>
