@@ -278,7 +278,7 @@ function App() {
         <div className="flex flex-col w-full h-full relative overflow-hidden">
           
           {/* Main Chat Container */}
-          <div ref={chatContainerRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden relative scroll-smooth flex flex-col items-center w-full pb-40">
+          <div ref={chatContainerRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden relative flex flex-col items-center w-full pb-40">
             
             {/* Abstract Background Decoration */}
             <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply dark:mix-blend-screen dark:opacity-10 flex justify-center -z-10">
