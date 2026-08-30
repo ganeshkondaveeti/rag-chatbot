@@ -277,14 +277,8 @@ function App() {
         {/* Chat Area */}
         <div className="flex flex-col w-full h-full relative overflow-hidden">
           
-          {/* Disclaimer Banner */}
-          <div className="w-full bg-error-container/20 dark:bg-error-container/10 border-b border-error/10 dark:border-error/20 py-3 px-margin-mobile lg:px-margin-desktop flex items-center justify-center gap-3 shrink-0 z-10 backdrop-blur-sm sticky top-0">
-            <span className="material-symbols-outlined text-error dark:text-red-400 text-[20px]" style={{fontVariationSettings: "'FILL' 1"}}>warning</span>
-            <p className="font-label-md text-on-surface-variant dark:text-gray-300 m-0">Facts-only. No investment advice.</p>
-          </div>
-
           {/* Main Chat Container */}
-          <div ref={chatContainerRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden relative scroll-smooth flex flex-col items-center w-full pb-32">
+          <div ref={chatContainerRef} className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden relative scroll-smooth flex flex-col items-center w-full pb-40">
             
             {/* Abstract Background Decoration */}
             <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply dark:mix-blend-screen dark:opacity-10 flex justify-center -z-10">
@@ -400,7 +394,16 @@ function App() {
           </div>
 
           {/* Input Area */}
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background via-background/95 to-transparent dark:from-gray-900 dark:via-gray-900/95 pt-12 pb-margin-mobile lg:pb-margin-desktop px-margin-mobile lg:px-margin-desktop flex justify-center z-20 pointer-events-none">
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background via-background/95 to-transparent dark:from-gray-900 dark:via-gray-900/95 pt-12 pb-margin-mobile lg:pb-margin-desktop px-margin-mobile lg:px-margin-desktop flex flex-col items-center z-20 pointer-events-none">
+            
+            {/* Disclaimer Banner */}
+            <div className="w-full max-w-[800px] pointer-events-auto mb-3 flex justify-center">
+              <div className="bg-error-container/30 dark:bg-error-container/20 border border-error/20 dark:border-error/30 py-1.5 px-4 rounded-full flex items-center justify-center gap-2 backdrop-blur-md shadow-sm">
+                <span className="material-symbols-outlined text-error dark:text-red-400 text-[16px]" style={{fontVariationSettings: "'FILL' 1"}}>warning</span>
+                <p className="font-label-sm font-medium text-error dark:text-red-300 m-0 text-xs">Facts-only. No investment advice.</p>
+              </div>
+            </div>
+
             <div className="w-full max-w-[800px] pointer-events-auto">
               <form onSubmit={handleSubmitForm} className="relative flex items-end w-full rounded-2xl bg-surface dark:bg-gray-800 shadow-[0_8px_30px_rgba(0,51,102,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-none ring-1 ring-outline-variant/30 dark:ring-gray-700 transition-all duration-300 focus-within:ring-2 focus-within:ring-secondary dark:focus-within:ring-primary-fixed focus-within:shadow-[0_8px_40px_rgba(48,94,160,0.2)] dark:focus-within:shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
                 <textarea 
