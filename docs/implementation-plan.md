@@ -891,9 +891,9 @@ Verify the complete system works locally on your Mac (backend + frontend + inges
 
 | # | Task | Action | Status |
 |---|------|--------|--------|
-| 8.8 | Create GitHub repository (public or private) | GitHub UI | `[ ]` |
-| 8.9 | Add remote origin: `git remote add origin <repo-url>` | Terminal | `[ ]` |
-| 8.10 | Push to main: `git push -u origin main` | Terminal | `[ ]` |
+| 8.8 | Create GitHub repository (public or private) | GitHub UI | `[x]` |
+| 8.9 | Add remote origin: `git remote add origin <repo-url>` | Terminal | `[x]` |
+| 8.10 | Push to main: `git push -u origin main` | Terminal | `[x]` |
 
 ### 8.4 Backend Deployment (Railway)
 
