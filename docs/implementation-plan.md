@@ -911,17 +911,17 @@ Verify the complete system works locally on your Mac (backend + frontend + inges
 |---|------|--------|--------|
 | 8.16 | Update `API_BASE` in `frontend/js/app.js` to Railway URL | Code edit | `[x]` |
 | 8.17 | Commit and push the API_BASE change | `git push` | `[x]` |
-| 8.18 | Create Vercel project and link to GitHub repo (`frontend/` root) | Vercel dashboard | `[ ]` |
-| 8.19 | Set Vercel build settings (output = `frontend/`, no build command) | Vercel dashboard | `[ ]` |
-| 8.20 | Verify Vercel deployment accessible at public URL | Browser | `[ ]` |
+| 8.18 | Create Vercel project and link to GitHub repo (`frontend/` root) | Vercel dashboard | `[x]` |
+| 8.19 | Set Vercel build settings (output = `frontend/`, no build command) | Vercel dashboard | `[x]` |
+| 8.20 | Verify Vercel deployment accessible at public URL | Browser | `[x]` |
 
 ### 8.6 Post-Deployment Verification
 
 | # | Task | Action | Status |
 |---|------|--------|--------|
-| 8.21 | Trigger first ingestion via GitHub Actions `workflow_dispatch` | GitHub UI | `[ ]` |
-| 8.22 | Test end-to-end: Vercel UI → Railway API → Groq → response | Manual | `[ ]` |
-| 8.23 | Verify CORS: Vercel domain can call Railway API | Browser DevTools | `[ ]` |
+| 8.21 | Trigger first ingestion via GitHub Actions `workflow_dispatch` | GitHub UI | `[x]` |
+| 8.22 | Test end-to-end: Vercel UI → Railway API → Groq → response | Manual | `[x]` |
+| 8.23 | Verify CORS: Vercel domain can call Railway API | Browser DevTools | `[x]` |
 
 > **Note**: A detailed phase-wise `docs/deployment.md` will be created separately after local verification and GitHub push. It will cover Railway setup, Vercel configuration, environment variables, persistent volumes, and GitHub Actions secrets step-by-step.
 
@@ -930,38 +930,38 @@ Verify the complete system works locally on your Mac (backend + frontend + inges
 ```
 1. ✅ Verify locally — backend + frontend both work on Mac
      ↓
-2. Push code to GitHub main branch
+2. ✅ Push code to GitHub main branch
      ↓
-3. Railway auto-builds & deploys backend from backend/
-   Vercel auto-builds & deploys frontend from frontend/
+3. ✅ Railway auto-builds & deploys backend from backend/
+   ✅ Vercel auto-builds & deploys frontend from frontend/
      ↓
-4. Set environment variables on Railway (GROQ_API_KEY, INGEST_API_KEY, etc.)
+4. ✅ Set environment variables on Railway (GROQ_API_KEY, INGEST_API_KEY, etc.)
      ↓
-5. Create persistent volume on Railway mounted at /data
+5. ✅ Create persistent volume on Railway mounted at /data
      ↓
-6. Update API_BASE to Railway URL, push to trigger Vercel redeploy
+6. ✅ Update API_BASE to Railway URL, push to trigger Vercel redeploy
      ↓
-7. Manually trigger first ingestion via GitHub Actions (workflow_dispatch)
+7. ✅ Manually trigger first ingestion via GitHub Actions (workflow_dispatch)
      ↓
-8. Verify: Vercel UI sends query → Railway processes → answer displayed
+8. ✅ Verify: Vercel UI sends query → Railway processes → answer displayed
      ↓
-9. Daily cron (10 AM IST) keeps data fresh automatically
+9. ✅ Daily cron (10 AM IST) keeps data fresh automatically
 ```
 
 ### 8.8 Acceptance Criteria
 
-- [ ] ✅ **Local**: Backend starts and serves `/api/health` on `localhost:8000`
-- [ ] ✅ **Local**: Frontend loads at `localhost:5500` with working chat
-- [ ] ✅ **Local**: End-to-end query flow works locally
-- [ ] ✅ **Local**: Local ingestion populates ChromaDB
-- [ ] ✅ **GitHub**: Code pushed to GitHub repository
-- [ ] ✅ **Railway**: Backend accessible at public URL
-- [ ] ✅ **Railway**: `GET /api/health` returns healthy
-- [ ] ✅ **Vercel**: Frontend accessible at public URL
-- [ ] ✅ **Vercel→Railway**: Frontend successfully calls backend API (no CORS errors)
-- [ ] ✅ **Ingestion**: First ingestion populates ChromaDB with ~100 chunks
-- [ ] ✅ **E2E**: Full query flow works: user types question → gets answer with source + footer
-- [ ] Persistent volume survives Railway redeployments
+- [x] ✅ **Local**: Backend starts and serves `/api/health` on `localhost:8000`
+- [x] ✅ **Local**: Frontend loads at `localhost:5500` with working chat
+- [x] ✅ **Local**: End-to-end query flow works locally
+- [x] ✅ **Local**: Local ingestion populates ChromaDB
+- [x] ✅ **GitHub**: Code pushed to GitHub repository
+- [x] ✅ **Railway**: Backend accessible at public URL
+- [x] ✅ **Railway**: `GET /api/health` returns healthy
+- [x] ✅ **Vercel**: Frontend accessible at public URL
+- [x] ✅ **Vercel→Railway**: Frontend successfully calls backend API (no CORS errors)
+- [x] ✅ **Ingestion**: First ingestion populates ChromaDB with ~100 chunks
+- [x] ✅ **E2E**: Full query flow works: user types question → gets answer with source + footer
+- [x] ✅ **Volume**: Persistent volume survives Railway redeployments
 
 ---
 
