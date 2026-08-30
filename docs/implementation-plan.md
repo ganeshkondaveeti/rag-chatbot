@@ -899,18 +899,18 @@ Verify the complete system works locally on your Mac (backend + frontend + inges
 
 | # | Task | Action | Status |
 |---|------|--------|--------|
-| 8.11 | Create Railway project and link to GitHub repo (`backend/` root) | Railway dashboard | `[ ]` |
-| 8.12 | Create Railway persistent volume mounted at `/data` | Railway dashboard | `[ ]` |
-| 8.13 | Set all Railway environment variables (see §11.1 in architecture) | Railway dashboard | `[ ]` |
-| 8.14 | Verify Railway build and deploy succeeds | Railway logs | `[ ]` |
-| 8.15 | Test `GET /api/health` on Railway URL | `curl` | `[ ]` |
+| 8.11 | Create Railway project and link to GitHub repo (`backend/` root) | Railway dashboard | `[x]` |
+| 8.12 | Create Railway persistent volume mounted at `/data` | Railway dashboard | `[x]` |
+| 8.13 | Set all Railway environment variables (see §11.1 in architecture) | Railway dashboard | `[x]` |
+| 8.14 | Verify Railway build and deploy succeeds | Railway logs | `[x]` |
+| 8.15 | Test `GET /api/health` on Railway URL | `curl` | `[x]` |
 
 ### 8.5 Frontend Deployment (Vercel)
 
 | # | Task | Action | Status |
 |---|------|--------|--------|
-| 8.16 | Update `API_BASE` in `frontend/js/app.js` to Railway URL | Code edit | `[ ]` |
-| 8.17 | Commit and push the API_BASE change | `git push` | `[ ]` |
+| 8.16 | Update `API_BASE` in `frontend/js/app.js` to Railway URL | Code edit | `[x]` |
+| 8.17 | Commit and push the API_BASE change | `git push` | `[x]` |
 | 8.18 | Create Vercel project and link to GitHub repo (`frontend/` root) | Vercel dashboard | `[ ]` |
 | 8.19 | Set Vercel build settings (output = `frontend/`, no build command) | Vercel dashboard | `[ ]` |
 | 8.20 | Verify Vercel deployment accessible at public URL | Browser | `[ ]` |
