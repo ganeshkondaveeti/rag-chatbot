@@ -206,7 +206,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-[100dvh] overflow-hidden">
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-surface dark:bg-gray-800 shadow-[0_4px_20px_rgba(0,51,102,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
         <div className="h-20 max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
@@ -228,10 +228,10 @@ function App() {
       </header>
 
       {/* Main Layout */}
-      <main className="w-full pt-20 flex-1 flex flex-col md:flex-row relative">
+      <main className="w-full pt-20 flex-1 flex flex-col md:flex-row relative overflow-hidden">
         
         {/* Sidebar */}
-        <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-surface-container-low dark:bg-gray-800/50 border-r border-outline-variant/30 dark:border-gray-700 h-[calc(100vh-80px)] sticky top-20 flex-shrink-0 z-40">
+        <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-surface-container-low dark:bg-gray-800/50 border-r border-outline-variant/30 dark:border-gray-700 h-full flex-shrink-0 z-40">
           <div className="p-4 border-b border-outline-variant/20 dark:border-gray-700">
             <button onClick={handleNewChat} className="w-full flex items-center justify-center gap-3 bg-primary text-on-primary py-4 px-6 rounded-xl hover:bg-primary/90 dark:bg-primary-container dark:text-on-primary-container dark:hover:bg-primary-container/90 transition-all duration-300 shadow-xl shadow-primary/20 dark:shadow-none ring-1 ring-primary-fixed/30 hover:scale-[1.02] active:scale-95 group">
               <span className="material-symbols-outlined text-[24px] font-bold">add</span>
@@ -275,7 +275,7 @@ function App() {
         </aside>
 
         {/* Chat Area */}
-        <div className="flex flex-col w-full h-[calc(100vh-80px)] relative">
+        <div className="flex flex-col w-full h-full relative overflow-hidden">
           
           {/* Disclaimer Banner */}
           <div className="w-full bg-error-container/20 dark:bg-error-container/10 border-b border-error/10 dark:border-error/20 py-3 px-margin-mobile lg:px-margin-desktop flex items-center justify-center gap-3 shrink-0 z-10 backdrop-blur-sm sticky top-0">
@@ -293,7 +293,7 @@ function App() {
               </svg>
             </div>
 
-            <div className="w-full max-w-[800px] flex flex-col gap-6 p-margin-mobile lg:p-margin-desktop min-h-full">
+            <div className={`w-full max-w-[800px] flex flex-col gap-6 p-margin-mobile lg:p-margin-desktop ${messages.length === 0 ? 'min-h-full justify-center' : ''}`}>
               
               {/* Welcome Section */}
               {messages.length === 0 && (
