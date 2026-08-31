@@ -56,7 +56,7 @@ def test_factual_queries(mock_pipeline, mock_llm):
         data = response.json()
         assert data["refused"] == False
         assert "This is a factual answer." in data["answer"]
-        assert "Source: http://test" in data["answer"]
+        assert "Source: [http://test](http://test)" in data["answer"]
 
 
 @patch("src.api.routes._llm_client")

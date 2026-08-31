@@ -36,7 +36,7 @@ def test_source_and_footer():
     
     res = ResponseFormatter.format_response(raw, context_chunks)
     
-    expected_footer = "\n\n🔗 Source: https://example.com/fund\n📅 Last updated from sources: 2023-10-01"
+    expected_footer = "\n\n🔗 Source: [https://example.com/fund](https://example.com/fund)\n📅 Last updated from sources: 2023-10-01"
     assert res["answer"] == raw + expected_footer
     assert res["source_url"] == "https://example.com/fund"
     assert res["last_updated"] == "2023-10-01"
