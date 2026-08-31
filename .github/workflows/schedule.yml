@@ -11,10 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Ingestion API
+        env:
+          BACKEND_URL: ${{ secrets.RAILWAY_BACKEND_URL }}
+          API_KEY: ${{ secrets.INGEST_API_KEY }}
         run: |
+          if [ -z "$BACKEND_URL" ] || [ -z "$API_KEY" ]; then
+            echo "Error: Required secrets (RAILWAY_BACKEND_URL, INGEST_API_KEY) are not set in GitHub Actions secrets."
+            exit 1
+          fi
+          
           echo "Triggering ingestion pipeline..."
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "${{ secrets.RAILWAY_BACKEND_URL }}/api/ingest/refresh" \
-            -H "Authorization: Bearer ${{ secrets.INGEST_API_KEY }}")
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "${BACKEND_URL}/api/ingest/refresh" \
+            -H "Authorization: Bearer ${API_KEY}")
             
           HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | sed '$d')
