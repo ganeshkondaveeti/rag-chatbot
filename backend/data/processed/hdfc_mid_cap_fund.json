@@ -1,0 +1,29 @@
+{
+  "scheme_name": "HDFC Mid Cap Fund",
+  "source_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
+  "scrape_date": "2026-08-30",
+  "sections": [
+    {
+      "section_name": "Fund Overview",
+      "content": "Direct Growth\nHDFC Mid Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Chirag Setalvad is the Current Fund Manager of HDFC Mid Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,67\nHDFC Mid Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Chirag Setalvad is the Current Fund Manager of HDFC Mid Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,67,910 Cr and the Latest NAV as of 28 Aug 2026 is ₹237.07.\nThe HDFC Mid Cap Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year.\n...Read more",
+      "data_points": {
+        "exit_load": "of 1%"
+      }
+    },
+    {
+      "section_name": "Fund Details",
+      "content": "Min. for SIP\n₹100\nFund size (AUM)\n₹1,05,142.69 Cr\nExpense ratio\n0.74%\nRating\n5",
+      "data_points": {}
+    },
+    {
+      "section_name": "NAV & AUM",
+      "content": "NAV: 28 Aug '26\n₹237.07",
+      "data_points": {}
+    },
+    {
+      "section_name": "Tax Info",
+      "content": "Tax implication\nIf you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
+      "data_points": {}
+    }
+  ]
+}

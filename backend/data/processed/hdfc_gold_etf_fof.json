@@ -1,0 +1,22 @@
+{
+  "scheme_name": "HDFC Gold ETF FoF",
+  "source_url": "https://groww.in/mutual-funds/hdfc-gold-etf-fund-of-fund-direct-plan-growth",
+  "scrape_date": "2026-08-30",
+  "sections": [
+    {
+      "section_name": "Fund Details",
+      "content": "Min. for SIP\n₹100\nFund size (AUM)\n₹11,197.05 Cr\nExpense ratio\n0.20%\nRating\n3",
+      "data_points": {}
+    },
+    {
+      "section_name": "NAV & AUM",
+      "content": "NAV: 28 Aug '26\n₹49.37",
+      "data_points": {}
+    },
+    {
+      "section_name": "Tax Info",
+      "content": "Tax implication\nIf you redeem within two years, returns are taxed as per your Income Tax slab. If you redeem after two years, returns are taxed at 12.5%.",
+      "data_points": {}
+    }
+  ]
+}
