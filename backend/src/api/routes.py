@@ -87,7 +87,7 @@ async def ingest_refresh(api_key: str = Depends(verify_api_key)):
     from src.ingestion.ingest import main as run_ingestion
     try:
         # Running the ingestion script logic
-        run_ingestion()
+        await run_ingestion()
         # Re-initialize the pipeline to pick up the new ChromaDB collection
         init_pipeline()
         return {"status": "success", "message": "Ingestion completed successfully."}

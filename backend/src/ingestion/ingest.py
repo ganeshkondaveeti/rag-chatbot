@@ -11,8 +11,14 @@ from src.ingestion.chunker import DocumentChunker
 from src.ingestion.embedder import Embedder
 from src.ingestion.vectorstore import VectorStoreManager
 
-def main():
+async def main():
     print("--- Starting Ingestion Pipeline ---")
+    
+    # 0. Scrape Data
+    from src.scraper.groww_scraper import GrowwScraper
+    print("Scraping latest data from Groww...")
+    scraper = GrowwScraper()
+    await scraper.run_all()
     
     # 1. Initialize Chunker
     print("Initializing chunker...")
@@ -45,4 +51,5 @@ def main():
     print(f"Total documents in ChromaDB collection '{vectorstore.collection_name}': {count}")
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
