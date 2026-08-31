@@ -6,9 +6,8 @@ from bs4 import BeautifulSoup
 from typing import List, Dict, Any
 
 try:
-    from playwright.async_api import async_playwright
+    import httpx
 except ImportError:
-    # Handle environment where playwright might not be installed yet
     pass
 
 from .content_cleaner import ContentCleaner
@@ -84,7 +83,8 @@ class GrowwScraper:
         return sections
 
     async def scrape_url(self, scheme: Dict[str, str]):
-        """Scrapes a single URL using Playwright."""
+        """Scrapes a single URL using httpx."""
+        import httpx
         url = scheme["url"]
         scheme_name = scheme["name"]
         scrape_date = datetime.now().strftime("%Y-%m-%d")
@@ -92,13 +92,13 @@ class GrowwScraper:
         print(f"Scraping {scheme_name} at {url}...")
         
         try:
-            async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=True)
-                page = await browser.new_page()
-                await page.goto(url, wait_until="networkidle", timeout=30000)
-                
-                html_content = await page.content()
-                await browser.close()
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                response = await client.get(
+                    url, 
+                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
+                )
+                response.raise_for_status()
+                html_content = response.text
                 
                 # Save Raw HTML
                 safe_name = scheme_name.replace(" ", "_").lower()
