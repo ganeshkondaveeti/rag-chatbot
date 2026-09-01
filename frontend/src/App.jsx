@@ -66,6 +66,11 @@ function App() {
     localStorage.removeItem('conversations');
   };
 
+  // Wake up backend on page load to avoid cold start delay
+  useEffect(() => {
+    fetch('/api/health').catch(e => console.error("Failed to wake up backend:", e));
+  }, []);
+
   // Initialize theme
   useEffect(() => {
     if (theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
