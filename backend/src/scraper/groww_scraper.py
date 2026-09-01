@@ -71,10 +71,14 @@ class GrowwScraper:
         if nav_match:
             sections.append(self.cleaner.process_section("NAV & AUM", nav_match.group(1).strip()))
             
-        # Tax Info
-        tax_match = re.search(r'(Tax implication.*?)(?=Check past data|Compare similar funds|Fund management)', text, re.IGNORECASE | re.DOTALL)
+        # Tax Info & Exit Load
+        tax_match = re.search(r'(Exit load, stamp duty and tax.*?)(?=Check past data|Compare similar funds|Fund management)', text, re.IGNORECASE | re.DOTALL)
         if tax_match:
-            sections.append(self.cleaner.process_section("Tax Info", tax_match.group(1).strip()))
+            sections.append(self.cleaner.process_section("Tax Info & Exit Load", tax_match.group(1).strip()))
+        else:
+            tax_match2 = re.search(r'(Tax implication.*?)(?=Check past data|Compare similar funds|Fund management)', text, re.IGNORECASE | re.DOTALL)
+            if tax_match2:
+                sections.append(self.cleaner.process_section("Tax Info", tax_match2.group(1).strip()))
             
         # Fallback
         if not sections:

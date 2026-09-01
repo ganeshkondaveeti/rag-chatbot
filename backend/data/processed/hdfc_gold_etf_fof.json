@@ -14,9 +14,11 @@
       "data_points": {}
     },
     {
-      "section_name": "Tax Info",
-      "content": "Tax implication\nIf you redeem within two years, returns are taxed as per your Income Tax slab. If you redeem after two years, returns are taxed at 12.5%.",
-      "data_points": {}
+      "section_name": "Tax Info & Exit Load",
+      "content": "Exit load, stamp duty and tax\nExit load\nExit load of 1%, if redeemed within 15 days.\nStamp duty on investment:\n0.005% (from July 1st, 2020)\nfrom July 1st 2020\nTax implication\nIf you redeem within two years, returns are taxed as per your Income Tax slab. If you redeem after two years, returns are taxed at 12.5%.",
+      "data_points": {
+        "exit_load": ", stamp duty and tax"
+      }
     }
   ]
 }

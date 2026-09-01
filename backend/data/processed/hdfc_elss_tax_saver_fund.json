@@ -19,9 +19,11 @@
       "data_points": {}
     },
     {
-      "section_name": "Tax Info",
-      "content": "Tax implication\nIf you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
-      "data_points": {}
+      "section_name": "Tax Info & Exit Load",
+      "content": "Exit load, stamp duty and tax\nExit load\nNil\nStamp duty on investment:\n0.005% (from July 1st, 2020)\nfrom July 1st 2020\nTax implication\nIf you redeem within one year, returns are taxed at 20%. If you redeem after one year, returns exceeding Rs 1.25 lakh in a financial year are taxed at 12.5%.",
+      "data_points": {
+        "exit_load": ", stamp duty and tax"
+      }
     }
   ]
 }
