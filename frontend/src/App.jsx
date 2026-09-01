@@ -98,29 +98,13 @@ function App() {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
         top: chatContainerRef.current.scrollHeight,
-        behavior: 'auto'
+        behavior: 'smooth'
       });
     }
   };
 
   useEffect(() => {
-    if (isTyping) {
-      wasTypingRef.current = true;
-      scrollToBottom();
-    } else {
-      if (wasTypingRef.current) {
-        wasTypingRef.current = false;
-        const lastUserMsgIndex = messages.length - 2;
-        if (lastUserMsgIndex >= 0) {
-          const msgEl = document.getElementById(`message-${lastUserMsgIndex}`);
-          if (msgEl) {
-            msgEl.scrollIntoView({ behavior: 'auto', block: 'start' });
-            return;
-          }
-        }
-      }
-      scrollToBottom();
-    }
+    scrollToBottom();
   }, [messages, isTyping]);
 
   const handleInputChange = (e) => {
@@ -184,12 +168,10 @@ function App() {
         break;
       }
       
-      const sourcesArray = data.source_url ? [{ url: data.source_url, title: 'Source' }] : [];
-      
       const assistantMsg = { 
         role: 'assistant', 
         content: data.answer,
-        sources: sourcesArray 
+        sources: data.sources 
       };
       
       setMessages((prev) => [...prev, assistantMsg]);

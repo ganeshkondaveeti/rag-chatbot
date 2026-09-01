@@ -30,6 +30,10 @@ class ResponseFormatter:
             scrape_date = metadata.get("scrape_date")
             
         final_response = truncated
+        
+        if source_url and scrape_date:
+            footer = f"\n\n🔗 Source: [{source_url}]({source_url})\n📅 Last updated from sources: {scrape_date}"
+            final_response += footer
             
         return {
             "answer": final_response,

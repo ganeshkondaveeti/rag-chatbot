@@ -64,7 +64,7 @@ def test_query_pipeline_success(mock_pipeline, mock_llm):
     data = response.json()
     assert data["refused"] == False
     assert "The expense ratio is 1.2%." in data["answer"]
-    assert data["source_url"] == "http://test"
+    assert "http://test" in data["answer"]
 
 def test_ingest_auth_missing():
     response = client.post("/api/ingest/refresh")
