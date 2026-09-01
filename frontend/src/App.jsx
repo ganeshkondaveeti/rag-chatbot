@@ -158,22 +158,38 @@ function App() {
     setIsTyping(true);
 
     try {
-      const response = await fetch('/api/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: query })
-      });
+      let response;
+      let data;
+      let retries = 2; // Retry twice on 504
       
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      while (retries >= 0) {
+        response = await fetch('/api/query', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: query })
+        });
+        
+        if (response.status === 504 && retries > 0) {
+          console.warn("Backend timeout (cold start). Retrying...");
+          retries--;
+          await new Promise(r => setTimeout(r, 2500));
+          continue;
+        }
+        
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        
+        data = await response.json();
+        break;
       }
       
-      const data = await response.json();
+      const sourcesArray = data.source_url ? [{ url: data.source_url, title: 'Source' }] : [];
       
       const assistantMsg = { 
         role: 'assistant', 
         content: data.answer,
-        sources: data.sources 
+        sources: sourcesArray 
       };
       
       setMessages((prev) => [...prev, assistantMsg]);
