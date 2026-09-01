@@ -1,13 +1,13 @@
 {
   "scheme_name": "HDFC Mid Cap Fund",
   "source_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
-  "scrape_date": "2026-08-30",
+  "scrape_date": "2026-09-01",
   "sections": [
     {
       "section_name": "Fund Overview",
-      "content": "Direct Growth\nHDFC Mid Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Chirag Setalvad is the Current Fund Manager of HDFC Mid Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,67\nHDFC Mid Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Chirag Setalvad is the Current Fund Manager of HDFC Mid Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,67,910 Cr and the Latest NAV as of 28 Aug 2026 is ₹237.07.\nThe HDFC Mid Cap Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year.\n...Read more",
+      "content": "HDFC Mid Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Chirag Setalvad is the Current Fund Manager of HDFC Mid Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,67,910 Cr and the Latest NAV as of 31 Aug 2026 is ₹237.52.\nThe HDFC Mid Cap Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year.\n;",
       "data_points": {
-        "exit_load": "of 1%"
+        "exit_load": "of 1% if redeemed within 1 year"
       }
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "section_name": "NAV & AUM",
-      "content": "NAV: 28 Aug '26\n₹237.07",
+      "content": "NAV: 31 Aug '26\n₹237.52",
       "data_points": {}
     },
     {

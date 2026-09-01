@@ -1,7 +1,7 @@
 {
   "scheme_name": "HDFC Gold ETF FoF",
   "source_url": "https://groww.in/mutual-funds/hdfc-gold-etf-fund-of-fund-direct-plan-growth",
-  "scrape_date": "2026-08-30",
+  "scrape_date": "2026-09-01",
   "sections": [
     {
       "section_name": "Fund Details",
@@ -10,7 +10,7 @@
     },
     {
       "section_name": "NAV & AUM",
-      "content": "NAV: 28 Aug '26\n₹49.37",
+      "content": "NAV: 31 Aug '26\n₹48.11",
       "data_points": {}
     },
     {

@@ -44,7 +44,7 @@ class ContentCleaner:
         if expense_ratio_match:
             data_points["expense_ratio"] = expense_ratio_match.group(1)
             
-        exit_load_match = re.search(r'Exit Load\s*([^%\n]*%?)', text, re.IGNORECASE)
+        exit_load_match = re.search(r'Exit Load\s*([^\n.]*)', text, re.IGNORECASE)
         if exit_load_match:
             data_points["exit_load"] = exit_load_match.group(1).strip()
             

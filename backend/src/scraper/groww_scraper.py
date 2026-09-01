@@ -57,7 +57,7 @@ class GrowwScraper:
         sections = []
         
         # Fund Overview
-        about_match = re.search(fr'About {re.escape(scheme_name)}(.*?)(?=Investment Objective|Fund benchmark|Scheme Information Document)', text, re.IGNORECASE | re.DOTALL)
+        about_match = re.search(fr'About\s+{re.escape(scheme_name)}.*?\n(.*?)(?=Investment Objective|Fund benchmark|Scheme Information Document)', text, re.IGNORECASE | re.DOTALL)
         if about_match:
             sections.append(self.cleaner.process_section("Fund Overview", about_match.group(1).strip()))
             
